@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Physics2DManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] MyBoxCollider2D[] _myBoxColliders2D;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

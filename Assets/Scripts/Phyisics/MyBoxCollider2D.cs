@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class MyBoxCollider2D : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float Width;
+    public float Height;
+    public float WidthOffSet;
+    public float HeightOffSet;
+    public float Mass;
+    private void OnDrawGizmos()
     {
-        
+        Gizmos.color = Color.red;
+                Gizmos.DrawRay(transform.position + (Vector3.left * Width + Vector3.down * Height) / 2f, Vector2.right * Width);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //adding מקדם חיכוך
 }
