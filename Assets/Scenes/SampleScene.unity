@@ -299,6 +299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackGround (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5719866283287622184, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
 --- !u!4 &581835374 stripped
@@ -360,6 +364,10 @@ PrefabInstance:
     - target: {fileID: 5719866283287622184, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
       propertyPath: m_Name
       value: BackGround (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719866283287622184, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
@@ -423,6 +431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackGround (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5719866283287622184, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
 --- !u!4 &1425923364 stripped
@@ -439,7 +451,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2009872808}
-  - component: {fileID: 2009872807}
   m_Layer: 0
   m_Name: PhysicsManager
   m_TagString: Untagged
@@ -447,20 +458,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2009872807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009872806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5fd6603f05aee444b90ade2dd998a1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _myBoxColliders2D:
-  - {fileID: 1695330474303581069}
 --- !u!4 &2009872808
 Transform:
   m_ObjectHideFlags: 0
@@ -476,6 +473,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2111592557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5719866283287622184, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
+  m_PrefabInstance: {fileID: 8991848939133278029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2111825563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -533,7 +535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5719866283287622184, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
@@ -597,6 +599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackGround (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5719866283287622184, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
 --- !u!4 &2144678971 stripped
@@ -617,7 +623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 384712076649644824, guid: 9652a70e74a0c57429c0beac15170f23, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.6
+      value: -23.6887
       objectReference: {fileID: 0}
     - target: {fileID: 384712076649644824, guid: 9652a70e74a0c57429c0beac15170f23, type: 3}
       propertyPath: m_LocalPosition.y
@@ -659,18 +665,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Catapult
       objectReference: {fileID: 0}
-    - target: {fileID: 2319984617836779047, guid: 9652a70e74a0c57429c0beac15170f23, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1695330474303581069, guid: 9652a70e74a0c57429c0beac15170f23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9652a70e74a0c57429c0beac15170f23, type: 3}
 --- !u!1 &1695330474303581068 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2319984617836779047, guid: 9652a70e74a0c57429c0beac15170f23, type: 3}
   m_PrefabInstance: {fileID: 1695330474303581067}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1695330474303581069
+--- !u!114 &1695330474303581072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -682,8 +685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc438e0bebea9f24a9380dfb01d4d8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 2
-  Height: 2
+  Width: 0.68953836
+  Height: 0.32
   WidthOffSet: 0
   HeightOffSet: 0
   Mass: 0
@@ -742,10 +745,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackGround
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5534502901055272804, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
 --- !u!4 &8991848939133278030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2893621301073739973, guid: 992b60774e0fc94439f40b7b9d7f2bc2, type: 3}
   m_PrefabInstance: {fileID: 8991848939133278029}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8991848939133278033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111592557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc438e0bebea9f24a9380dfb01d4d8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 19.2
+  Height: 10.8
+  WidthOffSet: 0
+  HeightOffSet: 0
+  Mass: 0

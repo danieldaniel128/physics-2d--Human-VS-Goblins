@@ -8,6 +8,11 @@ public class MyBoxCollider2D : MonoBehaviour
     public float WidthOffSet;
     public float HeightOffSet;
     public float Mass;
+
+    private void Start()
+    {
+    }
+
     //adding מקדם חיכוך
 
     private void OnDrawGizmosSelected()
