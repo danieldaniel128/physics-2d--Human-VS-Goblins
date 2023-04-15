@@ -61,17 +61,17 @@ public class MyBoxCollider2D : MonoBehaviour
         float otherMaxY = otherColliderRotatedPos.y + otherCollider.Height / 2f;
 
         // Check if the x and y ranges overlap
-        bool xOverlap = (thisMinX <= otherMaxX && thisMaxX >= otherMinX);
-        bool yOverlap = (thisMinY <= otherMaxY && thisMaxY >= otherMinY);
+        bool xOverlap = (thisMinX <= otherMaxX && thisMaxX >= otherMinX) || (thisMinX <= otherMaxX && thisMaxX <= otherMinX);
+        bool yOverlap = (thisMinY <= otherMaxY && thisMaxY >= otherMinY) || (thisMinY <= otherMaxY && thisMaxY <= otherMinY);
 
         if (xOverlap && yOverlap)
         {
-            //return true;
             return CheckLineSegmentIntersection(otherCollider);
         }
 
         return false;
     }
+
     private bool CheckLineSegmentIntersection(MyBoxCollider2D other)
     {
         // Calculate the corners of the two colliders
@@ -108,8 +108,7 @@ public class MyBoxCollider2D : MonoBehaviour
     {
         // Calculate the line segment parameters
         float x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y, x3 = p3.x, y3 = p3.y, x4 = p4.x, y4 = p4.y;
-
-        // Calculate the denominator of the two linear equations
+       // float x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y, x3 = p3.x, y3 = p3.y, x4 = p4.x, y4 = p4.y;// Calculate the denominator of the two linear equations
         float den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 
         // Check if the line segments are parallel or coincident
@@ -135,4 +134,5 @@ public class MyBoxCollider2D : MonoBehaviour
 
         return false;
     }
+
 }
