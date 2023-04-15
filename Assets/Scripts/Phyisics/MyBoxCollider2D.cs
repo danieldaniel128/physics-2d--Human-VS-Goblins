@@ -7,7 +7,7 @@ public class MyBoxCollider2D : MonoBehaviour
     public float WidthOffSet;
     public float HeightOffSet;
     public float Mass;
-    public float RotationAngle;
+    public float RotationAngle => transform.rotation.eulerAngles.z;
     public event Action<MyBoxCollider2D> OnCollision;
 
     //adding מקדם חיכוך
@@ -18,9 +18,22 @@ public class MyBoxCollider2D : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
+        DrawMyBoxColliderGizmo();
+    }
+
+    private void DrawMyBoxColliderGizmo() 
+    {
         Gizmos.DrawRay(transform.position + _eulerAngleEdges * ((Vector3.left * Width + Vector3.down * Height) / 2f), _eulerAngleEdges * Vector2.right * Width);
         Gizmos.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.up * Height) / 2f, _eulerAngleEdges * Vector2.right * Width);
         Gizmos.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
         Gizmos.DrawRay(transform.position + _eulerAngleEdges * (Vector3.right * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
     }
+    private void DrawMyBoxColliderInGame()
+    {
+        Debug.DrawRay(transform.position + _eulerAngleEdges * ((Vector3.left * Width + Vector3.down * Height) / 2f), _eulerAngleEdges * Vector2.right * Width);
+        Debug.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.up * Height) / 2f, _eulerAngleEdges * Vector2.right * Width);
+        Debug.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
+        Debug.DrawRay(transform.position + _eulerAngleEdges * (Vector3.right * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
+    }
+
 }
