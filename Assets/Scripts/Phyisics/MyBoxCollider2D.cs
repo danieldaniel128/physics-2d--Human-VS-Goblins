@@ -61,8 +61,8 @@ public class MyBoxCollider2D : MonoBehaviour
         float otherMaxY = otherColliderRotatedPos.y + otherCollider.Height / 2f;
 
         // Check if the x and y ranges overlap
-        bool xOverlap = (thisMinX <= otherMaxX && thisMaxX >= otherMinX) || (thisMinX <= otherMaxX && thisMaxX <= otherMinX);
-        bool yOverlap = (thisMinY <= otherMaxY && thisMaxY >= otherMinY) || (thisMinY <= otherMaxY && thisMaxY <= otherMinY);
+        bool xOverlap = (thisMinX <= otherMaxX && thisMaxX >= otherMinX) || (thisMinX >= otherMaxX && thisMaxX <= otherMinX);
+        bool yOverlap = (thisMinY <= otherMaxY && thisMaxY >= otherMinY) || (thisMinY >= otherMaxY && thisMaxY <= otherMinY);
 
         if (xOverlap && yOverlap)
         {
