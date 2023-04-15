@@ -43,12 +43,16 @@ public class CustomInspectorMyBoxCollider2D : Editor
             myBoxCollider2D.HeightOffSet = EditorGUILayout.FloatField("Height OffSet", myBoxCollider2D.HeightOffSet);
             myBoxCollider2D.Mass = EditorGUILayout.FloatField("Mass", myBoxCollider2D.Mass);
             EditorGUILayout.FloatField("Rotation Angle", myBoxCollider2D.RotationAngle);//readonly
-
-
-        if (GUILayout.Button("Reset Values"))
+            EditorGUILayout.Toggle("is collliding", myBoxCollider2D.isColliding);//readonly
+    
+            if (GUILayout.Button("Reset Values"))
             {
                 myBoxCollider2D.Width = myBoxCollider2D.GetComponent<SpriteRenderer>().bounds.size.x;
                 myBoxCollider2D.Height = myBoxCollider2D.GetComponent<SpriteRenderer>().bounds.size.y;
             }
-        }
+            if (GUILayout.Button("print all colliders"))
+            {
+                Physics2DManager.PrintColliders();
+            }
+    }
 }

@@ -17,6 +17,6 @@ public class MyRigidBody2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Physics2DManager.DoManagering();
     }
 }
