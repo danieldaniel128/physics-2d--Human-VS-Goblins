@@ -10,10 +10,24 @@ public class EditorOnComponentAdded
         ObjectFactory.componentWasAdded += HandleComponentAdded;
         EditorApplication.quitting -= OnEditorQuiting;
         EditorApplication.quitting += OnEditorQuiting;
-        Physics2DManager.Instance.OnAddToCollider(); 
     }
 
+    static void OnEnteredPlayMode(PlayModeStateChange value)
+    {
+        if (value == PlayModeStateChange.EnteredPlayMode)
+        {
+            Physics2DManager.Instance.OnAddToCollider();
+            Debug.Log("Instance: " + Physics2DManager.Instance);
+        }
+    }
 
+    [InitializeOnLoadMethod]
+    static void RegisterCallback()
+    {
+        EditorApplication.playModeStateChanged += OnEnteredPlayMode;
+        ObjectFactory.componentWasAdded -= HandleComponentAdded;
+        ObjectFactory.componentWasAdded += HandleComponentAdded;
+    }
 
     private static void HandleComponentAdded(Component obj)
     {
