@@ -10,7 +10,7 @@ public class EditorOnComponentAdded
         ObjectFactory.componentWasAdded += HandleComponentAdded;
         EditorApplication.quitting -= OnEditorQuiting;
         EditorApplication.quitting += OnEditorQuiting;
-        Physics2DManager.OnAddToCollider(); 
+        Physics2DManager.Instance.OnAddToCollider(); 
     }
 
 
@@ -21,7 +21,7 @@ public class EditorOnComponentAdded
         {
             (obj as MyBoxCollider2D).Width = obj.GetComponent<SpriteRenderer>().bounds.size.x;
             (obj as MyBoxCollider2D).Height = obj.GetComponent<SpriteRenderer>().bounds.size.y;
-            Physics2DManager.InvokeColliderWasAdded(obj as MyBoxCollider2D);
+            Physics2DManager.Instance.InvokeColliderWasAdded(obj as MyBoxCollider2D);
         }
     }
     private static void OnEditorQuiting()
@@ -52,7 +52,7 @@ public class CustomInspectorMyBoxCollider2D : Editor
             }
             if (GUILayout.Button("print all colliders"))
             {
-                Physics2DManager.PrintColliders();
+                Physics2DManager.Instance.PrintColliders();
             }
     }
 }

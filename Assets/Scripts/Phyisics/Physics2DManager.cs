@@ -4,22 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Physics2DManager
+public class Physics2DManager : MonoBehaviour
 {
+    public static Physics2DManager Instance;
     //after, i will do a collider script that different kinds of colliders will inherit from and the array will be of collider
-    public static List<MyBoxCollider2D> _myBoxColliders2D = new List<MyBoxCollider2D>();//collider get added with the events.
-    public static event Action<MyBoxCollider2D> ColliderWasAdded;
-    public static event Action<MyBoxCollider2D> ColliderWasRemoved;
+    public List<MyBoxCollider2D> _myBoxColliders2D;//collider get added with the events.
+    public event Action<MyBoxCollider2D> ColliderWasAdded;
+    public event Action<MyBoxCollider2D> ColliderWasRemoved;
 
-    public static float DeltaTime;
+    //public static float DeltaTime;
 
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
 
-    public static void DoManagering()
+    public void DoManagering()
     {
         CollidersAreTouching();
     }
 
-    public static void PrintColliders()
+    public void PrintColliders()
     {
         foreach (var item in _myBoxColliders2D)
         {
@@ -30,7 +38,7 @@ public class Physics2DManager
 
     #region Colliding Logic 
     //OnCollision?
-    public static void CollidersAreTouching() 
+    public void CollidersAreTouching() 
     {
         //_myBoxColliders2D.Where(a => _myBoxColliders2D.Where(b =>b!=a && Vector3.Distance(a.transform.position,b.transform.position) < )  )
         for (int i = 0; i < _myBoxColliders2D.Count; i++)
@@ -58,7 +66,7 @@ public class Physics2DManager
 
 
     #region ColliderWasAdded Subsribtion 
-    public static void InvokeColliderWasAdded(MyBoxCollider2D colliderWasAdded)
+    public void InvokeColliderWasAdded(MyBoxCollider2D colliderWasAdded)
     {
         ColliderWasAdded?.Invoke(colliderWasAdded);
         Debug.Log("invoked");//
@@ -66,27 +74,27 @@ public class Physics2DManager
             Debug.Log(adsdas);
     }
 
-    public static void InvokeColliderWasRemoved(MyBoxCollider2D colliderWasAdded)
+    public void InvokeColliderWasRemoved(MyBoxCollider2D colliderWasAdded)
     {
         ColliderWasRemoved?.Invoke(colliderWasAdded);
         Debug.Log("invoked");//
         foreach (var adsdas in _myBoxColliders2D)
             Debug.Log(adsdas);
     }
-    public static void OnAddToCollider() 
+    public void OnAddToCollider() 
     {
         ColliderWasAdded += AddToColliderList;
     }
-    static void AddToColliderList(MyBoxCollider2D collider) 
+    void AddToColliderList(MyBoxCollider2D collider) 
     {
         _myBoxColliders2D.Add(collider);
     }
 
-    public static void OnRemoveCollider()
+    public void OnRemoveCollider()
     {
         ColliderWasRemoved += RemoveColliderList;
     }
-    static void RemoveColliderList(MyBoxCollider2D collider)
+    void RemoveColliderList(MyBoxCollider2D collider)
     {
         _myBoxColliders2D.Remove(collider);
     }
