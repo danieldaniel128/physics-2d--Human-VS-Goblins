@@ -4,13 +4,13 @@ using UnityEngine;
 [InitializeOnLoad]
 public class EditorOnComponentAdded
 {
-    static EditorOnComponentAdded()
-    {
-        ObjectFactory.componentWasAdded -= HandleComponentAdded;
-        ObjectFactory.componentWasAdded += HandleComponentAdded;
-        EditorApplication.quitting -= OnEditorQuiting;
-        EditorApplication.quitting += OnEditorQuiting;
-    }
+    //static EditorOnComponentAdded()
+    //{
+    //    ObjectFactory.componentWasAdded -= HandleComponentAdded;
+    //    ObjectFactory.componentWasAdded += HandleComponentAdded;
+    //    EditorApplication.quitting -= OnEditorQuiting;
+    //    EditorApplication.quitting += OnEditorQuiting;
+    //}
 
     static void OnEnteredPlayMode(PlayModeStateChange value)
     {
@@ -21,13 +21,13 @@ public class EditorOnComponentAdded
         }
     }
 
-    [InitializeOnLoadMethod]
-    static void RegisterCallback()
-    {
-        EditorApplication.playModeStateChanged += OnEnteredPlayMode;
-        ObjectFactory.componentWasAdded -= HandleComponentAdded;
-        ObjectFactory.componentWasAdded += HandleComponentAdded;
-    }
+    //[InitializeOnLoadMethod]
+    //static void RegisterCallback()
+    //{
+    //    EditorApplication.playModeStateChanged += OnEnteredPlayMode;
+    //    ObjectFactory.componentWasAdded -= HandleComponentAdded;
+    //    ObjectFactory.componentWasAdded += HandleComponentAdded;
+    //}
 
     private static void HandleComponentAdded(Component obj)
     {
