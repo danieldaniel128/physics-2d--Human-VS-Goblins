@@ -48,6 +48,7 @@ public class Physics2DManager : MonoBehaviour
         {
             _timer = 0;
             _timerInSeconds++;
+            InvokeOnEverySecond();
         }
     }
 
