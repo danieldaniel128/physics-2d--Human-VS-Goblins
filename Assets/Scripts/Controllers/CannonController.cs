@@ -7,7 +7,10 @@ public class CannonController : MonoBehaviour
     [SerializeField] Vector2 CannonDirection;
     [SerializeField] GameObject AmmoPrefub;
     [SerializeField] float cannonChargeForce;
-    // Update is called once per frame
+    [SerializeField] float maxChargeForce;
+    [SerializeField] float chargingSpeed;//power per second
+
+
     void Update()
     {
         RotateCannon();
@@ -29,7 +32,8 @@ public class CannonController : MonoBehaviour
 
     void ShootBall()
     {
-        if (Input.GetMouseButtonDown(0)) 
+
+        if (Input.GetMouseButtonUp(0)) 
         {
             //GameObject ball = Instantiate(AmmoPrefub,transform.position,Quaternion.identity);//parent later
             MyRigidBody2D AmmoPrefubRigidBody = AmmoPrefub.GetComponent<MyRigidBody2D>();
@@ -37,6 +41,14 @@ public class CannonController : MonoBehaviour
             AmmoPrefub.transform.position = transform.position;
             AmmoPrefub.SetActive(true);
             AmmoPrefubRigidBody.AddForce(CannonDirection * cannonChargeForce);
+            cannonChargeForce = 0;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            if (cannonChargeForce < maxChargeForce)
+                cannonChargeForce += Time.deltaTime * chargingSpeed;
+            else
+                cannonChargeForce = maxChargeForce;
         }
     }
 
