@@ -9,8 +9,19 @@ public class Physics2DManager : MonoBehaviour
     public static Physics2DManager Instance;
     //after, i will do a collider script that different kinds of colliders will inherit from and the array will be of collider
     public List<MyBoxCollider2D> _myBoxColliders2D;//collider get added with the events.
+    public List<MyRigidBody2D> _myRigidbody2Ds;
+
+    public event Action OnEverySecond;
+
+
     public event Action<MyBoxCollider2D> ColliderWasAdded;
     public event Action<MyBoxCollider2D> ColliderWasRemoved;
+
+
+    /*[SerializeField]*/
+    float _timer;
+    [SerializeField] float _timerInSeconds;
+
 
     //public static float DeltaTime;
 
@@ -20,6 +31,24 @@ public class Physics2DManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+    }
+    private void Start()
+    {
+        //AddOnEverySecond(DoManagering);
+    }
+    private void Update()
+    {
+        DoManagering();
+        GameTimer();
+    }
+    void GameTimer() 
+    {
+        _timer += Time.deltaTime;
+        if (_timer >= 1)
+        {
+            _timer = 0;
+            _timerInSeconds++;
+        }
     }
 
     public void DoManagering()
@@ -102,9 +131,22 @@ public class Physics2DManager : MonoBehaviour
 
 
 
+    #region OnEverySecond
+    public void AddOnEverySecond(Action action) 
+    {
+        OnEverySecond += action;
+    }
 
+    public void InvokeOnEverySecond() 
+    {
+        OnEverySecond?.Invoke();
+    }
 
-
+    public void RemoveOnEverySecond(Action action)
+    {
+        OnEverySecond -= action;
+    }
+    #endregion 
 
 
 

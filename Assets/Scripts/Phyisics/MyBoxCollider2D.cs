@@ -51,13 +51,13 @@ public class MyBoxCollider2D : MonoBehaviour
         float thisMaxY = transform.position.y + Height / 2f;
 
         // Rotate the other collider's position around this collider's center point
-        Vector2 otherColliderRotatedPos = Quaternion.Euler(0, 0, -otherCollider.RotationAngle) * (otherCollider.transform.position - transform.position);
+        //Vector2 otherColliderRotatedPos = Quaternion.Euler(0, 0, -otherCollider.RotationAngle) * (otherCollider.transform.position - transform.position);
 
         // Find the minimum and maximum x and y values for the other collider
-        float otherMinX = otherColliderRotatedPos.x - otherCollider.Width / 2f;
-        float otherMaxX = otherColliderRotatedPos.x + otherCollider.Width / 2f;
-        float otherMinY = otherColliderRotatedPos.y - otherCollider.Height / 2f;
-        float otherMaxY = otherColliderRotatedPos.y + otherCollider.Height / 2f;
+        float otherMinX = otherCollider.transform.position.x - otherCollider.Width / 2f;
+        float otherMaxX = otherCollider.transform.position.x + otherCollider.Width / 2f;
+        float otherMinY = otherCollider.transform.position.y - otherCollider.Height / 2f;
+        float otherMaxY = otherCollider.transform.position.y + otherCollider.Height / 2f;
 
         // Check if the x and y ranges overlap
         bool xOverlap = (thisMinX <= otherMaxX && thisMaxX >= otherMinX) || (thisMinX >= otherMaxX && thisMaxX <= otherMinX);
@@ -65,7 +65,8 @@ public class MyBoxCollider2D : MonoBehaviour
 
         if (xOverlap && yOverlap)
         {
-            return CheckLineSegmentIntersection(otherCollider);
+            //isColliding=true;
+            return true; //CheckLineSegmentIntersection(otherCollider);
         }
 
         return false;

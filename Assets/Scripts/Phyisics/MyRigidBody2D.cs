@@ -17,8 +17,6 @@ public class MyRigidBody2D : MonoBehaviour
     public float y;
 
     
-    /*[SerializeField]*/ float _timer;
-    [SerializeField] float _timerInSeconds;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +27,7 @@ public class MyRigidBody2D : MonoBehaviour
     private void Update()
     {
         //put in a function
-        _timer += Time.deltaTime;
-        if(_timer >= 1)
-        {
-            _timer = 0;
-            _timerInSeconds++;
-        }
+        
 
         MoveObjects();
         UpdateVelocityValue();
