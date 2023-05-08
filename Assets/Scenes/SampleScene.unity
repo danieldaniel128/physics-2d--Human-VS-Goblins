@@ -518,6 +518,8 @@ MonoBehaviour:
   CannonDirection: {x: 0, y: 0}
   AmmoPrefub: {fileID: 1593825674}
   cannonChargeForce: 2
+  maxChargeForce: 4
+  chargingSpeed: 2
 --- !u!1001 &1910593638
 PrefabInstance:
   m_ObjectHideFlags: 0
