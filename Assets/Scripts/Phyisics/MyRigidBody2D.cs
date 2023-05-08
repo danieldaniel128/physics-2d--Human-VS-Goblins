@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,52 +6,71 @@ using UnityEngine;
 public class MyRigidBody2D : MonoBehaviour
 {
 
-    public Vector2 acceleration;
     //public Vector2 Force;
     public Vector2 velocity;
+    public Vector2 acceleration;
+
+
     public float gravity;
 
     public float x;
     public float y;
-    [SerializeField] bool activeGravity;
-    [SerializeField] bool moveRight;
 
-    [SerializeField] float moveRightForceTest;
-    [SerializeField] float TimeMove;
     
+    /*[SerializeField]*/ float _timer;
+    [SerializeField] float _timerInSeconds;
     // Start is called before the first frame update
     void Start()
     {
-        
+        acceleration.y = -gravity;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if(activeGravity)
-            GravityOfObject();
-        if (moveRight)
-            AddForceXAxisRight();
+        //put in a function
+        _timer += Time.deltaTime;
+        if(_timer >= 1)
+        {
+            _timer = 0;
+            _timerInSeconds++;
+        }
+
+        MoveObjects();
+        UpdateVelocityValue();
         UpdateXYValues();
     }
 
-    void GravityOfObject() 
+    void MoveObjects()
     {
-        transform.position += new Vector3 (0, velocity.y * Time.deltaTime + - ((gravity) * Time.deltaTime * Time.deltaTime) /2);
-        UpdateVelocity();
-    }
-    [ContextMenu("Force To Right and Active Gravity")]
-    void AddForceXAxisRight() 
-    {
-        activeGravity=true;
-        moveRight=true;
-        transform.position += new Vector3((moveRightForceTest) * Time.deltaTime, 0);
+        MoveObjectOnYAxis();
+        MoveObjectOnXAxis();
     }
 
-    private void UpdateVelocity()
+    void MoveObjectOnYAxis()//if acceleration.y is 0 its motion velocity doesnt change. first low of newton.
     {
-        if (activeGravity)
-            velocity.y -= gravity* Time.deltaTime;
+        transform.position += new Vector3 (0, velocity.y * Time.deltaTime +  ((acceleration.y) * Time.deltaTime * Time.deltaTime) /2);
+    }
+    void MoveObjectOnXAxis()//if acceleration.x is 0 its motion velocity doesnt change. first low of newton.
+    {
+        transform.position += new Vector3(velocity.x * Time.deltaTime + ((acceleration.x) * Time.deltaTime * Time.deltaTime) / 2, 0);
+    }
+
+
+
+    public void AddForce(Vector2 ForcePower)//not a real force, but like a kick. 
+    {
+        velocity += ForcePower;
+    }
+
+    private void UpdateVelocityValue()
+    {
+        velocity += acceleration * Time.deltaTime;
+    }
+
+    public void CalculateForcesAndAcceleration() 
+    {
+    
     }
 
     private void UpdateXYValues()

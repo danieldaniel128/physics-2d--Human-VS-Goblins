@@ -15,10 +15,9 @@ public class MyBoxCollider2D : MonoBehaviour
     public bool isColliding = false;
 
     private Quaternion _eulerAngleEdges => Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
-    //private void Update()
-    //{
-    //    DrawMyBoxColliderInGame();
-    //}
+
+
+
     private void OnDrawGizmos()
     {
         
