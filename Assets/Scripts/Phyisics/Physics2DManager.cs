@@ -89,6 +89,13 @@ public class Physics2DManager : MonoBehaviour
         }
     }
 
+    void CollisionImpact(MyBoxCollider2D collider1, MyBoxCollider2D collider2) 
+    {
+        MyRigidBody2D rigidbody1 = collider1.GetComponent<MyRigidBody2D>();
+        MyRigidBody2D rigidbody2 = collider2.GetComponent<MyRigidBody2D>();
+        collider1.Mass=6;
+    }
+
 
 
     #endregion

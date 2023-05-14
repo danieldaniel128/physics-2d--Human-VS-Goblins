@@ -11,7 +11,7 @@ public class MyRigidBody2D : MonoBehaviour
     public Vector2 acceleration;
 
 
-    public float gravity;
+    public float gravity = 10;
 
     public float x;
     public float y;
@@ -61,9 +61,9 @@ public class MyRigidBody2D : MonoBehaviour
         velocity += acceleration * Time.deltaTime;
     }
 
-    public void CalculateForcesAndAcceleration() 
+    public void CalculateForcesAndAcceleration(MyRigidBody2D myRigidBody2D,MyBoxCollider2D myBoxCollider2D) 
     {
-    
+        
     }
 
     private void UpdateXYValues()
