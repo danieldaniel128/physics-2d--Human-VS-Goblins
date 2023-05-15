@@ -74,7 +74,7 @@ public class Physics2DManager : MonoBehaviour
         //_myBoxColliders2D.Where(a => _myBoxColliders2D.Where(b =>b!=a && Vector3.Distance(a.transform.position,b.transform.position) < )  )
         for (int i = 0; i < _myBoxColliders2D.Count; i++)
         {
-            for (int j = i+1; j < _myBoxColliders2D.Count; j++)  //j=i+1
+            for (int j = i+1; j < _myBoxColliders2D.Count; j++)  //j=i+1 is optimizing run time
             {
                 //if (_myBoxColliders2D[i] == _myBoxColliders2D[j])
                 //    continue;
@@ -83,7 +83,8 @@ public class Physics2DManager : MonoBehaviour
                     _myBoxColliders2D[i].isColliding = true;
                     _myBoxColliders2D[j].isColliding = true;
                     if(!_myBoxColliders2D[i].staticObject)
-                    CollisionImpact(_myBoxColliders2D[i], _myBoxColliders2D[j]);
+                    CollisionImpact(_myBoxColliders2D[i], _myBoxColliders2D[j]);//one moving, one static
+                    //else collisionImpact between 2 moving objects
                 }
                 else
                 {
