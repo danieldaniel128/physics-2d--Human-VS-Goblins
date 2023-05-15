@@ -205,7 +205,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 498084001, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: gravity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 498084001, guid: 614c66fa1d6014846958284368067b90, type: 3}
+      propertyPath: velocity.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498084001, guid: 614c66fa1d6014846958284368067b90, type: 3}
+      propertyPath: acceleration.y
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965348, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_Name
@@ -217,11 +225,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965350, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.16
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965350, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.17
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965350, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_LocalPosition.z
@@ -722,6 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1293193826}
   - component: {fileID: 1293193825}
+  - component: {fileID: 1293193827}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -745,8 +754,9 @@ MonoBehaviour:
   Height: 2
   WidthOffSet: 0
   HeightOffSet: 0
-  Mass: 0
+  Mass: 1e+11
   isColliding: 0
+  staticObject: 1
 --- !u!4 &1293193826
 Transform:
   m_ObjectHideFlags: 0
@@ -772,6 +782,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1293193827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293193824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138e911c4a5a5e04cb0a9c9a532687e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  gravity: 0
+  x: 0
+  y: 0
 --- !u!1 &1593825674 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3582291235000391602, guid: 6847b920a97ac0249807a85017d444d2, type: 3}
@@ -1129,6 +1156,7 @@ MonoBehaviour:
   _myBoxColliders2D:
   - {fileID: 4266452589767855102}
   - {fileID: 498084000}
+  - {fileID: 1293193825}
   _myRigidbody2Ds:
   - {fileID: 2068470239}
   - {fileID: 498084001}
@@ -1306,6 +1334,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 498084001, guid: 614c66fa1d6014846958284368067b90, type: 3}
+      propertyPath: gravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965348, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_Name
       value: Colliding test 2
@@ -1316,11 +1348,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965350, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.32
+      value: 3.9
       objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965350, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.17
+      value: -2.38
       objectReference: {fileID: 0}
     - target: {fileID: 4266452591029965350, guid: 614c66fa1d6014846958284368067b90, type: 3}
       propertyPath: m_LocalPosition.z

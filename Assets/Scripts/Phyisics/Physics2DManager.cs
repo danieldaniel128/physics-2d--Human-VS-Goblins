@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Physics2DManager : MonoBehaviour
@@ -73,12 +74,16 @@ public class Physics2DManager : MonoBehaviour
         //_myBoxColliders2D.Where(a => _myBoxColliders2D.Where(b =>b!=a && Vector3.Distance(a.transform.position,b.transform.position) < )  )
         for (int i = 0; i < _myBoxColliders2D.Count; i++)
         {
-            for (int j = i+1; j < _myBoxColliders2D.Count; j++)
+            for (int j = i+1; j < _myBoxColliders2D.Count; j++)  //j=i+1
             {
+                //if (_myBoxColliders2D[i] == _myBoxColliders2D[j])
+                //    continue;
                 if (_myBoxColliders2D[i].CheckCollision(_myBoxColliders2D[j]))
                 {
                     _myBoxColliders2D[i].isColliding = true;
                     _myBoxColliders2D[j].isColliding = true;
+                    if(!_myBoxColliders2D[i].staticObject)
+                    CollisionImpact(_myBoxColliders2D[i], _myBoxColliders2D[j]);
                 }
                 else
                 {
@@ -89,12 +94,26 @@ public class Physics2DManager : MonoBehaviour
         }
     }
 
-    void CollisionImpact(MyBoxCollider2D collider1, MyBoxCollider2D collider2) 
+    void CollisionImpact(MyBoxCollider2D c1, MyBoxCollider2D c2)
     {
-        MyRigidBody2D rigidbody1 = collider1.GetComponent<MyRigidBody2D>();
-        MyRigidBody2D rigidbody2 = collider2.GetComponent<MyRigidBody2D>();
-        collider1.Mass=6;
+        MyRigidBody2D r1 = c1.GetComponent<MyRigidBody2D>();
+
+        // Calculate the mass and velocities of the objects
+        Vector2 r1Velocity = r1.velocity;
+        Vector2 r2Velocity = Vector2.zero; // Floor has no velocity
+
+        // Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
+        Vector2 collisionNormal = Vector2.up;
+        Vector2 relativeVelocity = r1Velocity - r2Velocity;
+        float impulseMagnitude = -2 * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass));
+        Vector2 impulse = impulseMagnitude * collisionNormal;
+
+        // Update the object's velocity
+        r1.velocity += impulse / c1.Mass;
     }
+
+
+
 
 
 

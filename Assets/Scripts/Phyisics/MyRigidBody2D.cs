@@ -24,7 +24,7 @@ public class MyRigidBody2D : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         //put in a function
         
@@ -42,11 +42,11 @@ public class MyRigidBody2D : MonoBehaviour
 
     void MoveObjectOnYAxis()//if acceleration.y is 0 its motion velocity doesnt change. first low of newton.
     {
-        transform.position += new Vector3 (0, velocity.y * Time.deltaTime +  ((acceleration.y) * Time.deltaTime * Time.deltaTime) /2);
+        transform.position += new Vector3 (0, velocity.y * (1 / 50f) +  ((acceleration.y) * (1/50f) * (1 / 50f)) /2);
     }
     void MoveObjectOnXAxis()//if acceleration.x is 0 its motion velocity doesnt change. first low of newton.
     {
-        transform.position += new Vector3(velocity.x * Time.deltaTime + ((acceleration.x) * Time.deltaTime * Time.deltaTime) / 2, 0);
+        transform.position += new Vector3(velocity.x * (1 / 50f) + ((acceleration.x) * (1 / 50f) * (1 / 50f)) / 2, 0);
     }
 
 

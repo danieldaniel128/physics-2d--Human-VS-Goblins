@@ -13,10 +13,15 @@ public class MyBoxCollider2D : MonoBehaviour
     //adding מקדם חיכוך
 
     public bool isColliding = false;
+    public bool staticObject = false;
+    public Quaternion EulerAngleEdges => Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
 
-    private Quaternion _eulerAngleEdges => Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
+    private void Start()
+    {
+        if(staticObject)
+            Mass = float.PositiveInfinity;
 
-
+    }
 
     private void OnDrawGizmos()
     {
@@ -30,23 +35,24 @@ public class MyBoxCollider2D : MonoBehaviour
 
     private void DrawMyBoxColliderGizmo() 
     {
-        Gizmos.DrawRay(transform.position + _eulerAngleEdges * ((Vector3.left * Width + Vector3.down * Height) / 2f), _eulerAngleEdges * Vector2.right * Width);
-        Gizmos.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.up * Height) / 2f, _eulerAngleEdges * Vector2.right * Width);
-        Gizmos.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
-        Gizmos.DrawRay(transform.position + _eulerAngleEdges * (Vector3.right * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * ((Vector3.left * Width + Vector3.down * Height) / 2f), EulerAngleEdges * Vector2.right * Width);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * Width + Vector3.up * Height) / 2f, EulerAngleEdges * Vector2.right * Width);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * Width + Vector3.down * Height) / 2f, EulerAngleEdges * Vector2.up * Height);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.right * Width + Vector3.down * Height) / 2f, EulerAngleEdges * Vector2.up * Height);
     }
     private void DrawMyBoxColliderInGame()
     {
-        Debug.DrawRay(transform.position + _eulerAngleEdges * ((Vector3.left * Width + Vector3.down * Height) / 2f), _eulerAngleEdges * Vector2.right * Width);
-        Debug.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.up * Height) / 2f, _eulerAngleEdges * Vector2.right * Width);
-        Debug.DrawRay(transform.position + _eulerAngleEdges * (Vector3.left * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
-        Debug.DrawRay(transform.position + _eulerAngleEdges * (Vector3.right * Width + Vector3.down * Height) / 2f, _eulerAngleEdges * Vector2.up * Height);
+        Debug.DrawRay(transform.position + EulerAngleEdges * ((Vector3.left * Width + Vector3.down * Height) / 2f), EulerAngleEdges * Vector2.right * Width);
+        Debug.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * Width + Vector3.up * Height) / 2f, EulerAngleEdges * Vector2.right * Width);
+        Debug.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * Width + Vector3.down * Height) / 2f, EulerAngleEdges * Vector2.up * Height);
+        Debug.DrawRay(transform.position + EulerAngleEdges * (Vector3.right * Width + Vector3.down * Height) / 2f, EulerAngleEdges * Vector2.up * Height);
     }
     public bool CheckCollision(MyBoxCollider2D otherCollider)
     {
-        // Find the minimum and maximum x and y values for this collider
-        float thisMinX = transform.position.x - Width / 2f;
-        float thisMaxX = transform.position.x + Width / 2f;
+        //Find the minimum and maximum x and y values for this collider
+
+       float thisMinX = transform.position.x - Width / 2f;
+       float thisMaxX = transform.position.x + Width / 2f;
         float thisMinY = transform.position.y - Height / 2f;
         float thisMaxY = transform.position.y + Height / 2f;
 
@@ -68,9 +74,55 @@ public class MyBoxCollider2D : MonoBehaviour
             //isColliding=true;
             return true; //CheckLineSegmentIntersection(otherCollider);
         }
+        //if (Mathf.Max(Height / 2, Width / 2) == Width / 2)
+        //{
+        //    Vector2[] collisionCorners = otherCollider.GetCornerPoints();
+        //    foreach (var item in collisionCorners)
+        //    {
+        //        float DistanceFromCorner = Vector2.Distance(item, transform.position);//(6.63, -0.41)
+        //        if (DistanceFromCorner <= Width / 2 || DistanceFromCorner <= Height / 2)
+        //        {
+        //            if (DistanceFromCorner <= Height / 2)
+        //            {
+        //                Debug.Log("works");
+        //                return true;
+        //            }
+        //        }
+        //    }
+
+        //}
+        //else
+        //    foreach (var item in otherCollider.GetCornerPoints())
+        //    {
+        //        float DistanceFromCorner = Vector2.Distance(item, transform.position);//(3.32, -0.17)
+        //        if (DistanceFromCorner <= Width / 2 || DistanceFromCorner <= Height / 2)
+        //        {
+        //            if (DistanceFromCorner <= Width / 2)
+        //            {
+        //                Debug.Log("works");
+        //                return true;
+        //            }
+        //        }
+        //    }
 
         return false;
     }
+
+
+
+
+
+
+    public Vector2[] GetCornerPoints()
+    {
+        // Calculate the corners of the collider based on its width, height, and offset values
+        Vector2 topLeft = transform.position + EulerAngleEdges * new Vector2(-Width / 2f + WidthOffSet, Height / 2f - HeightOffSet);
+        Vector2 topRight = transform.position + EulerAngleEdges * new Vector2(Width / 2f - WidthOffSet, Height / 2f - HeightOffSet);
+        Vector2 bottomLeft = transform.position + EulerAngleEdges * new Vector2(-Width / 2f + WidthOffSet, -Height / 2f + HeightOffSet);
+        Vector2 bottomRight = transform.position + EulerAngleEdges * new Vector2(Width / 2f - WidthOffSet, -Height / 2f + HeightOffSet);
+        return new Vector2[] { topLeft, topRight, bottomRight, bottomLeft };
+    }
+
 
     private bool CheckLineSegmentIntersection(MyBoxCollider2D other)
     {
@@ -93,38 +145,24 @@ public class MyBoxCollider2D : MonoBehaviour
         return false; // No intersection found
     }
 
-    private Vector2[] GetCornerPoints()
-    {
-        // Calculate the corners of the collider based on its width, height, and offset values
-        Vector2 topLeft = transform.position + _eulerAngleEdges * new Vector2(-Width / 2f + WidthOffSet, Height / 2f - HeightOffSet);
-        Vector2 topRight = transform.position + _eulerAngleEdges * new Vector2(Width / 2f - WidthOffSet, Height / 2f - HeightOffSet);
-        Vector2 bottomLeft = transform.position + _eulerAngleEdges * new Vector2(-Width / 2f + WidthOffSet, -Height / 2f + HeightOffSet);
-        Vector2 bottomRight = transform.position + _eulerAngleEdges * new Vector2(Width / 2f - WidthOffSet, -Height / 2f + HeightOffSet);
-
-        return new Vector2[] { topLeft, topRight, bottomRight, bottomLeft };
-    }
-
     private bool LineSegmentIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4)
     {
         // Calculate the line segment parameters
-        float x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y, x3 = p3.x, y3 = p3.y, x4 = p4.x, y4 = p4.y;
-       // float x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y, x3 = p3.x, y3 = p3.y, x4 = p4.x, y4 = p4.y;// Calculate the denominator of the two linear equations
-        float den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+        Vector2 dirA = p2 - p1;
+        Vector2 dirB = p4 - p3;
+        float den = dirA.x * dirB.y - dirA.y * dirB.x;
 
         // Check if the line segments are parallel or coincident
-        if (Mathf.Approximately(den, 0f))
+        const float epsilon = 0.0001f;
+        if (Mathf.Abs(den) < epsilon)
         {
             return false;
         }
 
         // Calculate the intersection point parameters
-        float t1 = (x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4);
-        float t2 = (x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3);
-
-        // Calculate the intersection point
-        float t = t1 / den;
-        float u = -t2 / den;
-        Vector2 intersectionPoint = new Vector2(x1 + t * (x2 - x1), y1 + t * (y2 - y1));
+        Vector2 diff = p1 - p3;
+        float t = (diff.x * dirB.y - diff.y * dirB.x) / den;
+        float u = (diff.x * dirA.y - diff.y * dirA.x) / den;
 
         // Check if the intersection point is within the line segments
         if (t >= 0f && t <= 1f && u >= 0f && u <= 1f)
@@ -134,5 +172,58 @@ public class MyBoxCollider2D : MonoBehaviour
 
         return false;
     }
+
+
+    #region Ai Tests
+    //public bool CheckCollision(MyBoxCollider2D otherCollider)
+    //{
+    //    Vector2[] cornersA = GetCornerPoints();
+    //    Vector2[] cornersB = otherCollider.GetCornerPoints();
+
+    //    for (int i = 0; i < cornersA.Length; i++)
+    //    {
+    //        for (int j = 0; j < cornersB.Length; j++)
+    //        {
+    //            if (CheckPointInsideCollider(cornersA[i], otherCollider) ||
+    //                CheckPointInsideCollider(cornersB[j], this))
+    //            {
+    //                Debug.Log("Collision detected");
+    //                return true;
+    //            }
+    //        }
+    //    }
+
+    //    return false;
+    //}
+
+    private bool CheckPointInsideCollider(Vector2 point, MyBoxCollider2D collider)
+    {
+        Vector2[] corners = collider.GetCornerPoints();
+        Vector2 v0 = corners[corners.Length - 1];
+        bool isInside = false;
+
+        for (int i = 0; i < corners.Length; i++)
+        {
+            Vector2 v1 = corners[i];
+            Vector2 v2 = corners[(i + 1) % corners.Length];
+
+            if (IsPointOnLeftSide(point, v0, v1) != IsPointOnLeftSide(point, v1, v2))
+            {
+                isInside = !isInside;
+            }
+
+            v0 = v1;
+        }
+
+        return isInside;
+    }
+
+    private bool IsPointOnLeftSide(Vector2 point, Vector2 lineStart, Vector2 lineEnd)
+    {
+        return ((lineEnd.x - lineStart.x) * (point.y - lineStart.y) -
+                (lineEnd.y - lineStart.y) * (point.x - lineStart.x)) > 0f;
+    }
+    #endregion
+
 
 }

@@ -56,6 +56,7 @@ public class CustomInspectorMyBoxCollider2D : Editor
             myBoxCollider2D.WidthOffSet = EditorGUILayout.FloatField("Width OffSet", myBoxCollider2D.WidthOffSet);
             myBoxCollider2D.HeightOffSet = EditorGUILayout.FloatField("Height OffSet", myBoxCollider2D.HeightOffSet);
             myBoxCollider2D.Mass = EditorGUILayout.FloatField("Mass", myBoxCollider2D.Mass);
+            myBoxCollider2D.staticObject = EditorGUILayout.Toggle("static", myBoxCollider2D.staticObject);
             EditorGUILayout.FloatField("Rotation Angle", myBoxCollider2D.RotationAngle);//readonly
             EditorGUILayout.Toggle("is collliding", myBoxCollider2D.isColliding);//readonly
     
