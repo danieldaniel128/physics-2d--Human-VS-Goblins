@@ -111,6 +111,7 @@ public class Physics2DManager : MonoBehaviour
 
         // Update the object's velocity
         r1.velocity += impulse / c1.Mass;
+        r1.transform.position =  new Vector3(r1.transform.position.x,c2.transform.position.y + c2.Height);
     }
 
 
