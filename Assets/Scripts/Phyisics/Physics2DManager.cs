@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Physics2DManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class Physics2DManager : MonoBehaviour
     //after, i will do a collider script that different kinds of colliders will inherit from and the array will be of collider
     public List<MyBoxCollider2D> _myBoxColliders2D;//collider get added with the events.
     public List<MyRigidBody2D> _myRigidbody2Ds;
+    
+    //public event Action<MyBoxCollider2D> OnCollisionEnter;
 
     public event Action OnEverySecond;
 
@@ -49,7 +52,7 @@ public class Physics2DManager : MonoBehaviour
         {
             _timer = 0;
             _timerInSeconds++;
-            InvokeOnEverySecond();
+            //InvokeOnEverySecond();
         }
     }
 
@@ -69,35 +72,82 @@ public class Physics2DManager : MonoBehaviour
 
     #region Colliding Logic 
     //OnCollision?
-    public void CollidersAreTouching() 
+    public void CollidersAreTouching()
     {
-        //_myBoxColliders2D.Where(a => _myBoxColliders2D.Where(b =>b!=a && Vector3.Distance(a.transform.position,b.transform.position) < )  )
-        
-        if(_myBoxColliders2D.Count>=2)
-        for (int i = _myBoxColliders2D.Count-1; i > 0; i--)
+        if (_myBoxColliders2D.Count >= 2)
         {
-            for (int j = i-1; j > 0; j--)  //j=i+1 is optimizing run time
+            foreach (var c1 in _myBoxColliders2D)
             {
-                if (_myBoxColliders2D[i].CheckCollision(_myBoxColliders2D[j]))
+                foreach (var c2 in _myBoxColliders2D)
                 {
-                    _myBoxColliders2D[i].isColliding = true;
-                    _myBoxColliders2D[j].isColliding = true;
-                    if (!_myBoxColliders2D[i].staticObject && _myBoxColliders2D[j].staticObject)
+                    if (c1 == c2)
+                        continue;
+
+                    if (c1.CheckCollision(c2))
                     {
-                        CollisionImpactStaticObject(_myBoxColliders2D[i], _myBoxColliders2D[j]);//one moving, one static
+                        // Determine the direction of the collision
+                        Vector2 c1PreviousPosition = c1.transform.position - new Vector3((c1.GetComponent<MyRigidBody2D>().velocity * (1 / 50f)).x, (c1.GetComponent<MyRigidBody2D>().velocity * (1 / 50f)).y);
+                        Vector2 c2PreviousPosition = c2.transform.position - new Vector3((c2.GetComponent<MyRigidBody2D>().velocity * (1 / 50f)).x, (c2.GetComponent<MyRigidBody2D>().velocity * (1 / 50f)).y);
+
+                        bool collisionFromLeftToRight = c1PreviousPosition.x < c2PreviousPosition.x;
+                        //bool collisionFromRightToLeft = c1PreviousPosition.x > c2PreviousPosition.x;
+                        if (c1.staticObject && !c2.staticObject)
+                        {
+                            CollisionImpactStaticObject(c2, c1); // One moving, one static
+                        }
+                        //else if (!c1.staticObject && !c2.staticObject)
+                        //    // Handle the collision based on the direction
+                        //    if (collisionFromLeftToRight)
+                        //    {
+                        //        CollisionImpact(c1, c2, collisionFromLeftToRight); // Both moving
+                        //    }
+                        //    else
+                        //    {
+                        //            CollisionImpact(c2, c1, collisionFromLeftToRight); // Both moving
+                        //    }
+
+                        c1.isColliding = true;
+                        c2.isColliding = true;
                     }
                     else
-                        CollisionImpact(_myBoxColliders2D[i], _myBoxColliders2D[j]);
-                    //else collisionImpact between 2 moving objects
-                }
-                else
-                {
-                    _myBoxColliders2D[i].isColliding = false;
-                    _myBoxColliders2D[j].isColliding = false;
+                    {
+                        c1.isColliding = false;
+                        c2.isColliding = false;
+                    }
                 }
             }
         }
     }
+
+    //for (int i = _myBoxColliders2D.Count-1; i > 0; i--)
+    //{
+    //    for (int j = _myBoxColliders2D.Count - 1; j > 0; j--)  //j=i+1 is optimizing run time
+    //    {
+    //            if (_myBoxColliders2D[i] == _myBoxColliders2D[j])
+    //                continue;
+    //        if (_myBoxColliders2D[i].CheckCollision(_myBoxColliders2D[j]))
+    //        {
+    //                //if(_myBoxColliders2D[i].FirstCollisionEnter)
+    //                //OnCollisionEnter.Invoke()
+    //            _myBoxColliders2D[i].isColliding = true;
+    //            _myBoxColliders2D[j].isColliding = true;
+    //            if (!_myBoxColliders2D[i].staticObject && _myBoxColliders2D[j].staticObject)
+    //            {
+    //                CollisionImpactStaticObject(_myBoxColliders2D[i], _myBoxColliders2D[j]);//one moving, one static
+    //            }
+    //            else
+    //                CollisionImpact(_myBoxColliders2D[i], _myBoxColliders2D[j]);
+    //            //else collisionImpact between 2 moving objects
+    //        }
+    //        else
+    //        {
+    //            _myBoxColliders2D[i].isColliding = false;
+    //            _myBoxColliders2D[j].isColliding = false;
+    //        }
+    //    }
+    //}
+
+
 
     void CollisionImpactStaticObject(MyBoxCollider2D c1, MyBoxCollider2D c2)
     {
@@ -108,31 +158,56 @@ public class Physics2DManager : MonoBehaviour
         Vector2 r2Velocity = Vector2.zero; // Floor has no velocity
         // Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
         Vector2 collisionNormal = Vector2.up;
+        if (c2.transform.position.y + c2.Height/2 >= c1.transform.position.y)
+                    collisionNormal = Vector2.right;
         Vector2 relativeVelocity = r1Velocity - r2Velocity;
         float impulseMagnitude = (-(1 + restitution) * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass)));
         Vector2 impulse = impulseMagnitude * collisionNormal;
 
         // Update the object's velocity
         r1.velocity += impulse / c1.Mass;
-        r1.transform.position =  new Vector3(r1.transform.position.x,c2.transform.position.y + c2.Height);
+        if(collisionNormal.y!=0)
+            r1.transform.position =  new Vector3(r1.transform.position.x,c2.transform.position.y + c2.Height / 2 + c1.Height/ 2);
+        else
+            r1.transform.position = new Vector3(c2.transform.position.x + c2.Width/2 +c1.Width/2, c1.transform.position.y);
     }
 
-    void CollisionImpact(MyBoxCollider2D c1, MyBoxCollider2D c2)
+    void CollisionImpact(MyBoxCollider2D c1, MyBoxCollider2D c2,bool collisionFromLeftToRight)
     {
-        //MyRigidBody2D r1 = c1.GetComponent<MyRigidBody2D>();
+        MyRigidBody2D r1 = c1.GetComponent<MyRigidBody2D>();
+        MyRigidBody2D r2 = c2.GetComponent<MyRigidBody2D>();
 
-        //// Calculate the mass and velocities of the objects
-        //Vector2 r1Velocity = r1.velocity;
-        //Vector2 r2Velocity = Vector2.zero; // Floor has no velocity
-        //// Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
-        //Vector2 collisionNormal = Vector2.up;
-        //Vector2 relativeVelocity = r1Velocity - r2Velocity;
-        //float impulseMagnitude = (-(1 + restitution) * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass)));
-        //Vector2 impulse = impulseMagnitude * collisionNormal;
+        // Calculate the velocities of the objects
+        Vector2 r1Velocity = r1.velocity;
+        Vector2 r2Velocity = r2.velocity;
 
-        //// Update the object's velocity
-        //r1.velocity += impulse / c1.Mass;
-        //r1.transform.position = new Vector3(r1.transform.position.x, c2.transform.position.y + c2.Height);
+        // Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
+        Vector2 collisionNormal;
+        if (collisionFromLeftToRight)
+            collisionNormal = Vector2.right;
+        else
+            collisionNormal = Vector2.left;
+        Vector2 relativeVelocity = r1Velocity - r2Velocity;
+        float impulseMagnitude = (-(1 + restitution) * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass)));
+
+        // Check the relative directions of the objects
+        bool r1MovingLeft = r1Velocity.x < 0f;
+        bool r2MovingLeft = r2Velocity.x < 0f;
+
+        // Adjust the impulse direction based on the relative directions
+        if ((r1MovingLeft && !r2MovingLeft) || (!r1MovingLeft && r2MovingLeft))
+        {
+            impulseMagnitude *= -1f;
+        }
+
+        Vector2 impulse = impulseMagnitude * collisionNormal;
+        Debug.Log($"{impulse}");
+        // Update the objects' velocities
+        r1.velocity += impulse / c1.Mass;
+        r2.velocity -= impulse / c2.Mass;
+        Debug.Log($"r1: {r1.velocity}, added {impulse / c1.Mass}. r2: {r2.velocity},added {impulse / c1.Mass}");
+        //r1.transform.position = new Vector3(r2.transform.position.x - 1.2f*c2.Width, r1.transform.position.y);
+        //r2.transform.position = new Vector3(r1.transform.position.x + 1.2f*c1.Width, r2.transform.position.y);
     }
 
 

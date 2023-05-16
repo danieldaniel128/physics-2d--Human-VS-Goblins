@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCollider: {fileID: 6418971977691897573}
   enemyRigidBody: {fileID: 8745335390036920828}
-  _enemySpeed: 2
+  _enemySpeed: 0
 --- !u!114 &8745335390036920828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
-  acceleration: {x: 0, y: 0}
+  acceleration: {x: -1, y: 0}
   gravity: 10
   x: 0
   y: 0
@@ -138,3 +138,4 @@ MonoBehaviour:
   Mass: 5
   isColliding: 0
   staticObject: 0
+  FirstCollisionEnter: 0

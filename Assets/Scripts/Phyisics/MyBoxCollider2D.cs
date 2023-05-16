@@ -17,6 +17,8 @@ public class MyBoxCollider2D : MonoBehaviour
     public bool staticObject = false;
     public Quaternion EulerAngleEdges => Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
 
+    public bool FirstCollisionEnter = false;
+
 
     private void Start()
     {
