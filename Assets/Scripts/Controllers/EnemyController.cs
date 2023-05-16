@@ -10,5 +10,11 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         enemyRigidBody.AddForce(_enemySpeed * Vector2.left);
+        enemyCollider.OnCollision += OnMyCollisionEnter2D;
     }
+    void OnMyCollisionEnter2D(MyBoxCollider2D collider) 
+    {
+        Debug.Log("collided with: "+ collider);
+    }
+
 }

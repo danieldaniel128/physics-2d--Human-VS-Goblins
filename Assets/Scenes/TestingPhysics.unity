@@ -1032,6 +1032,7 @@ MonoBehaviour:
   WidthOffSet: 0
   HeightOffSet: 0
   Mass: 0
+  CollidedTimer: 0
   isColliding: 0
   staticObject: 1
   FirstCollisionEnter: 0
@@ -1423,6 +1424,7 @@ MonoBehaviour:
   WidthOffSet: 0
   HeightOffSet: 0
   Mass: Infinity
+  CollidedTimer: 0
   isColliding: 0
   staticObject: 1
   FirstCollisionEnter: 0
@@ -1673,6 +1675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f787486ce8cbd4c855b650bbc6c681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemiesNumber: 1
   _spawnTimer: 0
   _spawnCooldown: 2
   _enemyPrefab: {fileID: 1805098598465577823, guid: efc489672d1e23c459430bd7d1eea6b0, type: 3}
@@ -2688,7 +2691,8 @@ MonoBehaviour:
   _myBoxColliders2D: []
   _myRigidbody2Ds: []
   _timerInSeconds: 0
-  restitution: 0.5
+  restitution: 1
+  timeToExitCollision: 0.01
 --- !u!1 &2016608278
 GameObject:
   m_ObjectHideFlags: 0

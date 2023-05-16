@@ -21,11 +21,11 @@ public class Physics2DManager : MonoBehaviour
     public event Action<MyBoxCollider2D> ColliderWasAdded;
     public event Action<MyBoxCollider2D> ColliderWasRemoved;
 
-
     /*[SerializeField]*/
     float _timer;
     [SerializeField] float _timerInSeconds;
     [SerializeField] float restitution = 0.5f;
+    [SerializeField] float timeToExitCollision;
 
     //public static float DeltaTime;
 
@@ -40,14 +40,14 @@ public class Physics2DManager : MonoBehaviour
     {
         //AddOnEverySecond(DoManagering);
     }
-    private void Update()
+    private void FixedUpdate()
     {
         DoManagering();
         GameTimer();
     }
     void GameTimer() 
     {
-        _timer += Time.deltaTime;
+        _timer += (1/50f);
         if (_timer >= 1)
         {
             _timer = 0;
@@ -94,6 +94,8 @@ public class Physics2DManager : MonoBehaviour
                         if (c1.staticObject && !c2.staticObject)
                         {
                             CollisionImpactStaticObject(c2, c1); // One moving, one static
+                            if(!c2.FirstCollisionEnter)
+                            c2.InvokeOnCollision(c1);
                         }
                         //else if (!c1.staticObject && !c2.staticObject)
                         //    // Handle the collision based on the direction
@@ -108,9 +110,15 @@ public class Physics2DManager : MonoBehaviour
 
                         c1.isColliding = true;
                         c2.isColliding = true;
+                        c2.CollidedTimer += (1/50f);
                     }
                     else
                     {
+                        if(c2.CollidedTimer> timeToExitCollision)
+                        {
+                            c2.CollidedTimer = 0;
+                            c2.FirstCollisionEnter = false;
+                        }//c1.FirstCollisionEnter = false;
                         c1.isColliding = false;
                         c2.isColliding = false;
                     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] int EnemiesNumber;
+    int countEnemies;
     [SerializeField] float _spawnTimer;
     [SerializeField] float _spawnCooldown;
     [SerializeField] GameObject _enemyPrefab;//healthBarPrefab
@@ -16,10 +18,12 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(countEnemies<EnemiesNumber)
         if(_spawnTimer < _spawnCooldown)
             _spawnTimer += Time.deltaTime;
         else
         {
+            countEnemies++;
             _spawnTimer = 0;
             SpawnGoblin();
         }
@@ -30,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
         GameObject healthBar = Instantiate(healthBarPrefab, enemiesHealthBarsParents);
         healthBar.GetComponent<EnemyHealthBarFollow>().enemyTransform = enemyInstance.transform;
         RectTransform healthBarRectTransform = healthBar.GetComponent<RectTransform>();
+
+
 
         // Get the canvas's RectTransform
         canvasRectTransform = canvas.GetComponent<RectTransform>();

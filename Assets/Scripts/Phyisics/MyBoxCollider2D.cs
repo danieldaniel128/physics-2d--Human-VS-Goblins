@@ -11,6 +11,8 @@ public class MyBoxCollider2D : MonoBehaviour
     public float RotationAngle => transform.rotation.eulerAngles.z;
     public event Action<MyBoxCollider2D> OnCollision;
 
+    public float CollidedTimer;
+
     //adding מקדם חיכוך
 
     public bool isColliding = false;
@@ -27,7 +29,6 @@ public class MyBoxCollider2D : MonoBehaviour
             Mass = float.PositiveInfinity;
         }
             Physics2DManager.Instance._myBoxColliders2D.Add(this);
-
     }
 
     private void OnDrawGizmos()
@@ -179,7 +180,11 @@ public class MyBoxCollider2D : MonoBehaviour
 
         return false;
     }
-
+    public void InvokeOnCollision(MyBoxCollider2D collider)
+    {
+        FirstCollisionEnter = true;
+        OnCollision?.Invoke(collider);
+    }
 
     #region Ai Tests
     //public bool CheckCollision(MyBoxCollider2D otherCollider)
