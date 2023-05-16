@@ -22,7 +22,7 @@ public class Physics2DManager : MonoBehaviour
     /*[SerializeField]*/
     float _timer;
     [SerializeField] float _timerInSeconds;
-
+    [SerializeField] float restitution = 0.5f;
 
     //public static float DeltaTime;
 
@@ -102,11 +102,10 @@ public class Physics2DManager : MonoBehaviour
         // Calculate the mass and velocities of the objects
         Vector2 r1Velocity = r1.velocity;
         Vector2 r2Velocity = Vector2.zero; // Floor has no velocity
-
         // Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
         Vector2 collisionNormal = Vector2.up;
         Vector2 relativeVelocity = r1Velocity - r2Velocity;
-        float impulseMagnitude = -2 * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass));
+        float impulseMagnitude = (-(1 + restitution) * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass)));
         Vector2 impulse = impulseMagnitude * collisionNormal;
 
         // Update the object's velocity

@@ -41,8 +41,8 @@ public class CannonController : MonoBehaviour
             AmmoPrefubRigidBody.velocity = Vector2.zero;
             AmmoPrefub.transform.position = transform.position;
             AmmoPrefub.SetActive(true);
-            cannonChargeForce = startChargingSpeed;
             AmmoPrefubRigidBody.AddForce(CannonDirection * cannonChargeForce);
+            cannonChargeForce = startChargingSpeed;
         }
         if (Input.GetMouseButton(0))
         {
