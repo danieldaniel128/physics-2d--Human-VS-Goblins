@@ -1416,7 +1416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnTimer: 0
   _spawnCooldown: 2
-  _enemyPrefab: {fileID: 6417758454764197030, guid: e758fc4db8f613d4cb8dd44f06654b2c, type: 3}
+  _enemyPrefab: {fileID: 1805098598465577823, guid: efc489672d1e23c459430bd7d1eea6b0, type: 3}
   _enemiesParent: {fileID: 728565717}
 --- !u!1 &1149410073
 GameObject:

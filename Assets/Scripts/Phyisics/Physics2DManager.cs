@@ -72,20 +72,19 @@ public class Physics2DManager : MonoBehaviour
     public void CollidersAreTouching() 
     {
         //_myBoxColliders2D.Where(a => _myBoxColliders2D.Where(b =>b!=a && Vector3.Distance(a.transform.position,b.transform.position) < )  )
+        
+        if(_myBoxColliders2D.Count>=2)
         for (int i = _myBoxColliders2D.Count-1; i > 0; i--)
         {
-            for (int j = i; j > 0; j--)  //j=i+1 is optimizing run time
+            for (int j = i-1; j > 0; j--)  //j=i+1 is optimizing run time
             {
-                if (_myBoxColliders2D[i] == _myBoxColliders2D[j])
-                    continue;
                 if (_myBoxColliders2D[i].CheckCollision(_myBoxColliders2D[j]))
                 {
                     _myBoxColliders2D[i].isColliding = true;
                     _myBoxColliders2D[j].isColliding = true;
                     if (!_myBoxColliders2D[i].staticObject && _myBoxColliders2D[j].staticObject)
                     {
-                        Debug.Log("collide with static yesss");
-                     CollisionImpactStaticObject(_myBoxColliders2D[i], _myBoxColliders2D[j]);//one moving, one static
+                        CollisionImpactStaticObject(_myBoxColliders2D[i], _myBoxColliders2D[j]);//one moving, one static
                     }
                     else
                         CollisionImpact(_myBoxColliders2D[i], _myBoxColliders2D[j]);
