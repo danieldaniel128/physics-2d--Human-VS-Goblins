@@ -2691,7 +2691,7 @@ MonoBehaviour:
   _myBoxColliders2D: []
   _myRigidbody2Ds: []
   _timerInSeconds: 0
-  restitution: 1
+  restitution: 0.5
   timeToExitCollision: 0.01
 --- !u!1 &2016608278
 GameObject:
