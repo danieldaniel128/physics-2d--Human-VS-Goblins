@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 public class MyBoxCollider2D : MonoBehaviour
 {
@@ -16,10 +17,14 @@ public class MyBoxCollider2D : MonoBehaviour
     public bool staticObject = false;
     public Quaternion EulerAngleEdges => Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
 
+
     private void Start()
     {
-        if(staticObject)
+        if (staticObject)
+        { 
             Mass = float.PositiveInfinity;
+        }
+            Physics2DManager.Instance._myBoxColliders2D.Add(this);
 
     }
 

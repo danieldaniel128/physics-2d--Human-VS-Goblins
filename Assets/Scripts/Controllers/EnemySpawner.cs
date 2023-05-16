@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] float spawnTimer;
-    [SerializeField] float spawnCooldown;
-
+    [SerializeField] float _spawnTimer;
+    [SerializeField] float _spawnCooldown;
+    [SerializeField] GameObject _enemyPrefab;
+    [SerializeField] Transform _enemiesParent;
     // Update is called once per frame
     void Update()
     {
-        if(spawnTimer < spawnCooldown)
-            spawnTimer+=Time.deltaTime;
+        if(_spawnTimer < _spawnCooldown)
+            _spawnTimer += Time.deltaTime;
         else
         {
-            spawnTimer = 0;
-            //do something
+            _spawnTimer = 0;
+            SpawnGoblin();
         }
     }
+    void SpawnGoblin() 
+    {
+        Instantiate(_enemyPrefab,transform.position, _enemyPrefab.transform.rotation, _enemiesParent);
+    }
+
 }
