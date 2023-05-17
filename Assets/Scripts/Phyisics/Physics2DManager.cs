@@ -116,7 +116,6 @@ public class Physics2DManager : MonoBehaviour
                     {
                         if(c2.CollidedTimer > timeToExitCollision && c2.GetComponent<MyRigidBody2D>().velocity.y <= -0.3f && c2.GetComponent<MyRigidBody2D>().velocity.y<=0)
                         {
-                            Debug.Log("exit collision");
                             c2.CollidedTimer = 0;
                             c2.FirstCollisionEnter = false;
                         }//c1.FirstCollisionEnter = false;

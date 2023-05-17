@@ -36,11 +36,9 @@ public class CannonController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0)) 
         {
-            //GameObject ball = Instantiate(AmmoPrefub,transform.position,Quaternion.identity);//parent later
-            MyRigidBody2D AmmoPrefubRigidBody = AmmoPrefub.GetComponent<MyRigidBody2D>();
+            GameObject ball = Instantiate(AmmoPrefub,transform.position, AmmoPrefub.transform.rotation);//parent later
+            MyRigidBody2D AmmoPrefubRigidBody = ball.GetComponent<MyRigidBody2D>();
             AmmoPrefubRigidBody.velocity = Vector2.zero;
-            AmmoPrefub.transform.position = transform.position;
-            AmmoPrefub.SetActive(true);
             AmmoPrefubRigidBody.AddForce(CannonDirection * cannonChargeForce);
             cannonChargeForce = startChargingSpeed;
         }
