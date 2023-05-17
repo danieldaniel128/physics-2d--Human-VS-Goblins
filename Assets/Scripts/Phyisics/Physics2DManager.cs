@@ -94,31 +94,22 @@ public class Physics2DManager : MonoBehaviour
                         if (!c1.staticObject && c2.staticObject)
                         {
                             CollisionImpactStaticObject(c1, c2); // One moving, one static
-                            if (!c2.FirstCollisionEnter && !c1.FirstCollisionEnter)
-                            {
                                 c1.InvokeOnCollision(c2);
                                 c2.InvokeOnCollision(c1);
-                            }
                         }
                         else if (!c1.staticObject && !c2.staticObject)
                             // Handle the collision based on the direction
                             if (collisionFromLeftToRight)
                             {
                                 CollisionImpact(c1, c2, collisionFromLeftToRight); // Both moving
-                                if (!c2.FirstCollisionEnter && !c1.FirstCollisionEnter)
-                                {
                                     c1.InvokeOnCollision(c2);
                                     c2.InvokeOnCollision(c1);
-                                }
                             }
                             else
                             {
                                 CollisionImpact(c2, c1, collisionFromLeftToRight); // Both moving
-                                if (!c2.FirstCollisionEnter && !c1.FirstCollisionEnter)
-                                {
                                     c1.InvokeOnCollision(c2);
                                     c2.InvokeOnCollision(c1);
-                                }
                             }
 
                         c1.isColliding = true;
@@ -128,20 +119,6 @@ public class Physics2DManager : MonoBehaviour
                     }
                     else
                     {
-                        if(c2.CollidedTimer > timeToExitCollision && c2.GetComponent<MyRigidBody2D>().velocity.y <= -0.3f && c2.GetComponent<MyRigidBody2D>().velocity.y<=0)//when standing on floor
-                        {
-                            c2.CollidedTimer = 0;
-                            c1.CollidedTimer = 0;
-                            c1.FirstCollisionEnter = false;
-                            c2.FirstCollisionEnter = false;
-                        }//c1.FirstCollisionEnter = false;
-                        if(!c1.staticObject && !c2.staticObject && c1.CollidedTimer > timeToExitCollision && c2.CollidedTimer > timeToExitCollision)
-                        {
-                            c1.FirstCollisionEnter = false;
-                            c2.FirstCollisionEnter = false;
-
-                        }
-
                         c1.isColliding = false;
                         c2.isColliding = false;
                     }

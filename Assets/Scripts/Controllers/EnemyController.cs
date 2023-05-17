@@ -19,7 +19,11 @@ public class EnemyController : MonoBehaviour
        
         if (collider.tag.Equals("Castle"))
         {
-             GameManager.Instance.PlayerCastleHealth.DealDamage(EnemyHealth.Damage);//do it so it will get health and do the logic of values inside instead of getting damage
+             GameManager.Instance.PlayerCastleHealth.GotHurt(EnemyHealth.Damage);//do it so it will get health and do the logic of values inside instead of getting damage
+        }
+        if (collider.tag.Equals("PlayersWeapon"))
+        {
+            EnemyHealth.GotHurt(GameManager.Instance.PlayerCastleHealth.Damage);
         }
     }
 

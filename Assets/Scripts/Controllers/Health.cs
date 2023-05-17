@@ -23,7 +23,7 @@ using UnityEngine.UI;
         }
 
 
-        public void DealDamage(float dealedDamage) 
+        public void GotHurt(float dealedDamage) 
         {
             CurrnetHP -= dealedDamage;
             if(CurrnetHP<0)
