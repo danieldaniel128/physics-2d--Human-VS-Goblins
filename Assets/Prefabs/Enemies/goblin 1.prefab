@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138e911c4a5a5e04cb0a9c9a532687e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0}
-  acceleration: {x: -1, y: 0}
+  velocity: {x: -2, y: 0}
+  acceleration: {x: 0, y: 0}
   gravity: 10
   x: 0
   y: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   WidthOffSet: 0
   HeightOffSet: 0
   Mass: 5
+  CollidedTimer: 0
   isColliding: 0
   staticObject: 0
   FirstCollisionEnter: 0

@@ -97,16 +97,16 @@ public class Physics2DManager : MonoBehaviour
                             if(!c2.FirstCollisionEnter)
                             c1.InvokeOnCollision(c2);
                         }
-                        //else if (!c1.staticObject && !c2.staticObject)
-                        //    // Handle the collision based on the direction
-                        //    if (collisionFromLeftToRight)
-                        //    {
-                        //        CollisionImpact(c1, c2, collisionFromLeftToRight); // Both moving
-                        //    }
-                        //    else
-                        //    {
-                        //            CollisionImpact(c2, c1, collisionFromLeftToRight); // Both moving
-                        //    }
+                        else if (!c1.staticObject && !c2.staticObject)
+                            // Handle the collision based on the direction
+                            if (collisionFromLeftToRight)
+                            {
+                                CollisionImpact(c1, c2, collisionFromLeftToRight); // Both moving
+                            }
+                            else
+                            {
+                                CollisionImpact(c2, c1, collisionFromLeftToRight); // Both moving
+                            }
 
                         c1.isColliding = true;
                         c2.isColliding = true;
@@ -175,9 +175,9 @@ public class Physics2DManager : MonoBehaviour
         // Update the object's velocity
         r1.velocity += impulse / c1.Mass;
         if(collisionNormal.y!=0)
-            r1.transform.position =  new Vector3(r1.transform.position.x,c2.transform.position.y + c2.Height / 2 + c1.Height/ 2);
+            r1.transform.position =  new Vector3(r1.transform.position.x,c2.transform.position.y + c2.HeightUpAndOffset / 2 + c1.HeightUpAndOffset / 2);
         else
-            r1.transform.position = new Vector3(c2.transform.position.x + c2.Width/2 +c1.Width/2, c1.transform.position.y);
+            r1.transform.position = new Vector3(c2.transform.position.x + c2.WidthRightAndOffset / 2 +c1.WidthRightAndOffset / 2, c1.transform.position.y);
     }
 
     void CollisionImpact(MyBoxCollider2D c1, MyBoxCollider2D c2,bool collisionFromLeftToRight)
@@ -211,11 +211,12 @@ public class Physics2DManager : MonoBehaviour
         Vector2 impulse = impulseMagnitude * collisionNormal;
         Debug.Log($"{impulse}");
         // Update the objects' velocities
-        r1.velocity += impulse / c1.Mass;
-        r2.velocity -= impulse / c2.Mass;
-        Debug.Log($"r1: {r1.velocity}, added {impulse / c1.Mass}. r2: {r2.velocity},added {impulse / c1.Mass}");
-        //r1.transform.position = new Vector3(r2.transform.position.x - 1.2f*c2.Width, r1.transform.position.y);
-        //r2.transform.position = new Vector3(r1.transform.position.x + 1.2f*c1.Width, r2.transform.position.y);
+        r1.velocity -= impulse / c1.Mass;
+        r2.velocity += impulse / c2.Mass;
+        Debug.Log($"r1: {r1.velocity}, added {impulse / c1.Mass}. r2: {r2.velocity},added {impulse / c2.Mass}");
+        r1.transform.position = new Vector3(c2.transform.position.x - c2.Width / 2 - c1.Width / 2, c1.transform.position.y);
+        r2.transform.position = new Vector3(c1.transform.position.x + c1.Width / 2 + c2.Width / 2, c2.transform.position.y);
+            //r1.transform.position = new Vector3(c2.transform.position.x + c2.WidthRightAndOffset / 2 + c1.WidthRightAndOffset / 2, c1.transform.position.y);
     }
 
 
