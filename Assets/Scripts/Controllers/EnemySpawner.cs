@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] RectTransform canvasRectTransform;
     [SerializeField] Canvas canvas;
     [SerializeField] Transform enemiesHealthBarsParents;
+    [SerializeField] float xOffset;
     [SerializeField] float yOffset;
     // Update is called once per frame
     void Update()
@@ -31,18 +32,12 @@ public class EnemySpawner : MonoBehaviour
     void SpawnGoblin() 
     {
         GameObject enemyInstance = Instantiate(_enemyPrefab,transform.position, _enemyPrefab.transform.rotation, _enemiesParent);
-        GameObject healthBar = Instantiate(healthBarPrefab, enemiesHealthBarsParents);
-        healthBar.GetComponent<EnemyHealthBarFollow>().enemyTransform = enemyInstance.transform;
-        RectTransform healthBarRectTransform = healthBar.GetComponent<RectTransform>();
-
-
-
-        // Get the canvas's RectTransform
-        canvasRectTransform = canvas.GetComponent<RectTransform>();
-
-        // Position the health bar relative to the enemy
-        Vector3 healthBarPosition = Camera.main.WorldToScreenPoint(enemyInstance.transform.position + Vector3.up * yOffset);
-        healthBarRectTransform.position = healthBarPosition - new Vector3((canvasRectTransform.sizeDelta / 2f).x, (canvasRectTransform.sizeDelta / 2f).y);
+        GameObject enemyHealthBar = Instantiate(healthBarPrefab, enemiesHealthBarsParents);
+        HealthBarFollow healthBarFollow = enemyHealthBar.GetComponent<HealthBarFollow>();
+        UIManager.Instance.EnemyHealthBarAdded(healthBarFollow.HealthBarImage);
+        healthBarFollow.TargetTransform = enemyInstance.transform;
+        healthBarFollow.yOffset = yOffset;
+        healthBarFollow.yOffset = yOffset;
     }
 
 }

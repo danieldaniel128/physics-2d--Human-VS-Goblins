@@ -128,7 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6c04e9ad070d14495b7c13317ad2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTransform: {fileID: 0}
+  healthBarRectTransform: {fileID: 6262595474702614516}
+  TargetTransform: {fileID: 0}
+  HealthBarImage: {fileID: 6262595475395895266}
   yOffset: 1.4
   xOffset: -0.3
 --- !u!1 &6262595474806868483
