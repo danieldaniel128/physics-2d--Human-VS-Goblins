@@ -8,6 +8,11 @@ public class MyBoxCollider2D : MonoBehaviour
     public float WidthOffSet;
     public float HeightOffSet;
     public float Mass;
+
+    public float WidthRightAndOffset => Width + WidthOffSet;
+    public float WidthLeftAndOffset => Width - WidthOffSet;
+    public float HeightUpAndOffset => Height + HeightOffSet;
+    public float HeightDownAndOffset => Height - HeightOffSet;
     public float RotationAngle => transform.rotation.eulerAngles.z;
     public event Action<MyBoxCollider2D> OnCollision;
 
@@ -43,10 +48,10 @@ public class MyBoxCollider2D : MonoBehaviour
 
     private void DrawMyBoxColliderGizmo() 
     {
-        Gizmos.DrawRay(transform.position + EulerAngleEdges * ((Vector3.left * Width + Vector3.down * Height) / 2f), EulerAngleEdges * Vector2.right * Width);
-        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * Width + Vector3.up * Height) / 2f, EulerAngleEdges * Vector2.right * Width);
-        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * Width + Vector3.down * Height) / 2f, EulerAngleEdges * Vector2.up * Height);
-        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.right * Width + Vector3.down * Height) / 2f, EulerAngleEdges * Vector2.up * Height);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * ((Vector3.left * WidthLeftAndOffset + Vector3.down * HeightDownAndOffset) / 2f), EulerAngleEdges * Vector2.right * Width);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * WidthLeftAndOffset + Vector3.up * HeightUpAndOffset) / 2f, EulerAngleEdges * Vector2.right * Width);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.left * WidthLeftAndOffset + Vector3.down * HeightDownAndOffset) / 2f, EulerAngleEdges * Vector2.up * Height);
+        Gizmos.DrawRay(transform.position + EulerAngleEdges * (Vector3.right * WidthRightAndOffset + Vector3.down * HeightDownAndOffset) / 2f, EulerAngleEdges * Vector2.up * Height);
     }
     private void DrawMyBoxColliderInGame()
     {
@@ -59,19 +64,19 @@ public class MyBoxCollider2D : MonoBehaviour
     {
         //Find the minimum and maximum x and y values for this collider
 
-       float thisMinX = transform.position.x - Width / 2f;
-       float thisMaxX = transform.position.x + Width / 2f;
-        float thisMinY = transform.position.y - Height / 2f;
-        float thisMaxY = transform.position.y + Height / 2f;
+       float thisMinX = transform.position.x - WidthLeftAndOffset / 2f;
+       float thisMaxX = transform.position.x + WidthRightAndOffset / 2f;
+        float thisMinY = transform.position.y - HeightDownAndOffset / 2f;
+        float thisMaxY = transform.position.y + HeightUpAndOffset / 2f;
 
         // Rotate the other collider's position around this collider's center point
         //Vector2 otherColliderRotatedPos = Quaternion.Euler(0, 0, -otherCollider.RotationAngle) * (otherCollider.transform.position - transform.position);
 
         // Find the minimum and maximum x and y values for the other collider
-        float otherMinX = otherCollider.transform.position.x - otherCollider.Width / 2f;
-        float otherMaxX = otherCollider.transform.position.x + otherCollider.Width / 2f;
-        float otherMinY = otherCollider.transform.position.y - otherCollider.Height / 2f;
-        float otherMaxY = otherCollider.transform.position.y + otherCollider.Height / 2f;
+        float otherMinX = otherCollider.transform.position.x - otherCollider.WidthLeftAndOffset / 2f;
+        float otherMaxX = otherCollider.transform.position.x + otherCollider.WidthRightAndOffset / 2f;
+        float otherMinY = otherCollider.transform.position.y - otherCollider.HeightDownAndOffset / 2f;
+        float otherMaxY = otherCollider.transform.position.y + otherCollider.HeightUpAndOffset / 2f;
 
         // Check if the x and y ranges overlap
         bool xOverlap = (thisMinX <= otherMaxX && thisMaxX >= otherMinX) || (thisMinX >= otherMaxX && thisMaxX <= otherMinX);
