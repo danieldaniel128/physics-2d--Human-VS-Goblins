@@ -10,10 +10,6 @@ public class HealthBarFollow : MonoBehaviour
     public Image HealthBarImage;
     public float yOffset;
     public float xOffset;
-    private void Start()
-    {
-        healthBarRectTransform = GetComponent<RectTransform>();
-    }
 
     private void LateUpdate()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<Image> _enemiesHealthBarImages;
 
     public static UIManager Instance;
+
+    public event Action< Image, float, float> UpdateHealthBarImageEvent;
 
 
     private void Awake()
@@ -24,5 +27,14 @@ public class UIManager : MonoBehaviour
         _enemiesHealthBarImages.Add(enemyHealthBarImage);
     }
 
+
+    public void InvokeUpdateHealthBar(Image image, float newHealth , float maxHealth)
+    {
+        UpdateHealthBarImageEvent?.Invoke(image,newHealth, maxHealth);
+    }
+    public void UpdateHealthBarUI(Image healthBar, float newHealth, float maxHealth) 
+    {
+        healthBar.fillAmount = newHealth/maxHealth;
+    }
 
 }

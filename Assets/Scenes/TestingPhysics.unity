@@ -954,7 +954,7 @@ GameObject:
   - component: {fileID: 556865651}
   m_Layer: 0
   m_Name: Castle
-  m_TagString: Untagged
+  m_TagString: Castle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1396,7 +1396,7 @@ GameObject:
   - component: {fileID: 877923974}
   m_Layer: 0
   m_Name: Ground (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1697,8 +1697,6 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 1805098598465577823, guid: efc489672d1e23c459430bd7d1eea6b0, type: 3}
   healthBarPrefab: {fileID: 6262595474702614517, guid: 35e610b970c100b428719186067c1d53, type: 3}
   _enemiesParent: {fileID: 728565717}
-  canvasRectTransform: {fileID: 1209653896}
-  canvas: {fileID: 1209653895}
   enemiesHealthBarsParents: {fileID: 610038566}
   xOffset: 0
   yOffset: 1

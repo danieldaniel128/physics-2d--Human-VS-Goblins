@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] MyBoxCollider2D enemyCollider;
     [SerializeField] MyRigidBody2D enemyRigidBody;
     [SerializeField] float _enemySpeed;
+    public Health EnemyHealth { get; set; }
+
     private void Start()
     {
         enemyRigidBody.AddForce(_enemySpeed * Vector2.left);
@@ -14,7 +16,11 @@ public class EnemyController : MonoBehaviour
     }
     void OnMyCollisionEnter2D(MyBoxCollider2D collider) 
     {
-        Debug.Log("collided with: "+ collider);
+       
+        if (collider.tag.Equals("Castle"))
+        {
+            Debug.Log("collided with: "+ collider);
+        }
     }
 
 }

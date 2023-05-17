@@ -5,18 +5,26 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] int EnemiesNumber;
+    [SerializeField] float _enemyDamage;
     int countEnemies;
     [SerializeField] float _spawnTimer;
     [SerializeField] float _spawnCooldown;
     [SerializeField] GameObject _enemyPrefab;//healthBarPrefab
     [SerializeField] GameObject healthBarPrefab;
     [SerializeField] Transform _enemiesParent;
-    [SerializeField] RectTransform canvasRectTransform;
-    [SerializeField] Canvas canvas;
     [SerializeField] Transform enemiesHealthBarsParents;
+
+
     [SerializeField] float xOffset;
     [SerializeField] float yOffset;
-    // Update is called once per frame
+
+
+
+    private void Start()
+    {
+        UIManager.Instance.UpdateHealthBarImageEvent+=UIManager.Instance.UpdateHealthBarUI;
+    }
+
     void Update()
     {
         if(countEnemies<EnemiesNumber)
@@ -35,6 +43,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemyHealthBar = Instantiate(healthBarPrefab, enemiesHealthBarsParents);
         HealthBarFollow healthBarFollow = enemyHealthBar.GetComponent<HealthBarFollow>();
         UIManager.Instance.EnemyHealthBarAdded(healthBarFollow.HealthBarImage);
+        enemyInstance.GetComponent<EnemyController>().EnemyHealth = new Health(healthBarFollow.HealthBarImage, _enemyDamage);
         healthBarFollow.TargetTransform = enemyInstance.transform;
         healthBarFollow.yOffset = yOffset;
         healthBarFollow.yOffset = yOffset;

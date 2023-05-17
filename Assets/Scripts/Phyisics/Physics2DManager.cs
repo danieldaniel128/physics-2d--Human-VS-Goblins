@@ -91,11 +91,11 @@ public class Physics2DManager : MonoBehaviour
 
                         bool collisionFromLeftToRight = c1PreviousPosition.x < c2PreviousPosition.x;
                         //bool collisionFromRightToLeft = c1PreviousPosition.x > c2PreviousPosition.x;
-                        if (c1.staticObject && !c2.staticObject)
+                        if (!c1.staticObject && c2.staticObject)
                         {
-                            CollisionImpactStaticObject(c2, c1); // One moving, one static
+                            CollisionImpactStaticObject(c1, c2); // One moving, one static
                             if(!c2.FirstCollisionEnter)
-                            c2.InvokeOnCollision(c1);
+                            c1.InvokeOnCollision(c2);
                         }
                         //else if (!c1.staticObject && !c2.staticObject)
                         //    // Handle the collision based on the direction
