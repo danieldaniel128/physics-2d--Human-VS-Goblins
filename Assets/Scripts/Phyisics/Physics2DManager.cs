@@ -94,31 +94,54 @@ public class Physics2DManager : MonoBehaviour
                         if (!c1.staticObject && c2.staticObject)
                         {
                             CollisionImpactStaticObject(c1, c2); // One moving, one static
-                            if(!c2.FirstCollisionEnter)
-                            c1.InvokeOnCollision(c2);
+                            if (!c2.FirstCollisionEnter && !c1.FirstCollisionEnter)
+                            {
+                                c1.InvokeOnCollision(c2);
+                                c2.InvokeOnCollision(c1);
+                            }
                         }
                         else if (!c1.staticObject && !c2.staticObject)
                             // Handle the collision based on the direction
                             if (collisionFromLeftToRight)
                             {
                                 CollisionImpact(c1, c2, collisionFromLeftToRight); // Both moving
+                                if (!c2.FirstCollisionEnter && !c1.FirstCollisionEnter)
+                                {
+                                    c1.InvokeOnCollision(c2);
+                                    c2.InvokeOnCollision(c1);
+                                }
                             }
                             else
                             {
                                 CollisionImpact(c2, c1, collisionFromLeftToRight); // Both moving
+                                if (!c2.FirstCollisionEnter && !c1.FirstCollisionEnter)
+                                {
+                                    c1.InvokeOnCollision(c2);
+                                    c2.InvokeOnCollision(c1);
+                                }
                             }
 
                         c1.isColliding = true;
                         c2.isColliding = true;
-                        c2.CollidedTimer += (1/50f);
+                        c1.CollidedTimer += (1 / 50f);
+                        c2.CollidedTimer += (1 / 50f);
                     }
                     else
                     {
-                        if(c2.CollidedTimer > timeToExitCollision && c2.GetComponent<MyRigidBody2D>().velocity.y <= -0.3f && c2.GetComponent<MyRigidBody2D>().velocity.y<=0)
+                        if(c2.CollidedTimer > timeToExitCollision && c2.GetComponent<MyRigidBody2D>().velocity.y <= -0.3f && c2.GetComponent<MyRigidBody2D>().velocity.y<=0)//when standing on floor
                         {
                             c2.CollidedTimer = 0;
+                            c1.CollidedTimer = 0;
+                            c1.FirstCollisionEnter = false;
                             c2.FirstCollisionEnter = false;
                         }//c1.FirstCollisionEnter = false;
+                        if(!c1.staticObject && !c2.staticObject && c1.CollidedTimer > timeToExitCollision && c2.CollidedTimer > timeToExitCollision)
+                        {
+                            c1.FirstCollisionEnter = false;
+                            c2.FirstCollisionEnter = false;
+
+                        }
+
                         c1.isColliding = false;
                         c2.isColliding = false;
                     }
@@ -209,14 +232,11 @@ public class Physics2DManager : MonoBehaviour
         }
 
         Vector2 impulse = impulseMagnitude * collisionNormal;
-        Debug.Log($"{impulse}");
         // Update the objects' velocities
         r1.velocity -= impulse / c1.Mass;
         r2.velocity += impulse / c2.Mass;
-        Debug.Log($"r1: {r1.velocity}, added {impulse / c1.Mass}. r2: {r2.velocity},added {impulse / c2.Mass}");
-        r1.transform.position = new Vector3(c2.transform.position.x - c2.Width / 2 - c1.Width / 2, c1.transform.position.y);
-        r2.transform.position = new Vector3(c1.transform.position.x + c1.Width / 2 + c2.Width / 2, c2.transform.position.y);
-            //r1.transform.position = new Vector3(c2.transform.position.x + c2.WidthRightAndOffset / 2 + c1.WidthRightAndOffset / 2, c1.transform.position.y);
+        r1.transform.position = new Vector3(c2.transform.position.x - c2.Width / 2 - c1.Width / 2 -0.01f, c1.transform.position.y);//so they will not enter each other more than once in a split seconds
+        r2.transform.position = new Vector3(c1.transform.position.x + c1.Width / 2 + c2.Width / 2 + 0.01f, c2.transform.position.y);
     }
 
 
