@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
        
         if (collider.tag.Equals("Castle"))
         {
-            Debug.Log("collided with: "+ collider);
+             GameManager.Instance.PlayerCastleHealth.DealDamage(EnemyHealth.Damage);//do it so it will get health and do the logic of values inside instead of getting damage
         }
     }
 

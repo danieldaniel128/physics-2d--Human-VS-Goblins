@@ -8,7 +8,7 @@ using UnityEngine.UI;
     public class Health
     {
         public float CurrnetHP { get; set; }
-        public float MaxHP { get; set; } = 10;
+        public float MaxHP { get; set; } = 100;
         public float Damage { get; set; }
         public Image ImageHealthBar { get; set; }
 
