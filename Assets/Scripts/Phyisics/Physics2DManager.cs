@@ -127,35 +127,6 @@ public class Physics2DManager : MonoBehaviour
         }
     }
 
-    //for (int i = _myBoxColliders2D.Count-1; i > 0; i--)
-    //{
-    //    for (int j = _myBoxColliders2D.Count - 1; j > 0; j--)  //j=i+1 is optimizing run time
-    //    {
-    //            if (_myBoxColliders2D[i] == _myBoxColliders2D[j])
-    //                continue;
-    //        if (_myBoxColliders2D[i].CheckCollision(_myBoxColliders2D[j]))
-    //        {
-    //                //if(_myBoxColliders2D[i].FirstCollisionEnter)
-    //                //OnCollisionEnter.Invoke()
-    //            _myBoxColliders2D[i].isColliding = true;
-    //            _myBoxColliders2D[j].isColliding = true;
-    //            if (!_myBoxColliders2D[i].staticObject && _myBoxColliders2D[j].staticObject)
-    //            {
-    //                CollisionImpactStaticObject(_myBoxColliders2D[i], _myBoxColliders2D[j]);//one moving, one static
-    //            }
-    //            else
-    //                CollisionImpact(_myBoxColliders2D[i], _myBoxColliders2D[j]);
-    //            //else collisionImpact between 2 moving objects
-    //        }
-    //        else
-    //        {
-    //            _myBoxColliders2D[i].isColliding = false;
-    //            _myBoxColliders2D[j].isColliding = false;
-    //        }
-    //    }
-    //}
-
-
 
     void CollisionImpactStaticObject(MyBoxCollider2D c1, MyBoxCollider2D c2)
     {
