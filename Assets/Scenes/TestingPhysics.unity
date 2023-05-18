@@ -1661,10 +1661,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Width: 7.919023
   Height: 2.59
-  WidthOffSet: 0
+  WidthOffSet: -0.88
   HeightOffSet: -1.61
   Mass: Infinity
-  CollidedTimer: 416.5896
+  CollidedTimer: 416.66956
   isColliding: 0
   staticObject: 1
   FirstCollisionEnter: 1
@@ -3066,7 +3066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f787486ce8cbd4c855b650bbc6c681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemiesNumber: 10
+  EnemiesNumber: 2
   _enemyDamage: 5
   _spawnTimer: 0
   _spawnCooldown: 2
