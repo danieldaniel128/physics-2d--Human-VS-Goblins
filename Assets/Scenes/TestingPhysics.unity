@@ -1660,14 +1660,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 7.919023
-  Height: 2.6
-  WidthOffSet: -0.81
-  HeightOffSet: -1.27
+  Height: 2.59
+  WidthOffSet: 0
+  HeightOffSet: -1.61
   Mass: Infinity
-  CollidedTimer: 13.160111
+  CollidedTimer: 416.5896
   isColliding: 0
   staticObject: 1
-  FirstCollisionEnter: 0
+  FirstCollisionEnter: 1
 --- !u!114 &556865651
 MonoBehaviour:
   m_ObjectHideFlags: 0
