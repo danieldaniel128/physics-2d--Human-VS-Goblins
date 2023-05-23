@@ -38,11 +38,13 @@ public class MyRigidBody2D : MonoBehaviour
     {
         MoveObjectOnYAxis();
         MoveObjectOnXAxis();
+        
     }
 
     void MoveObjectOnYAxis()//if acceleration.y is 0 its motion velocity doesnt change. first low of newton.
     {
-        transform.position += new Vector3 (0, velocity.y * (1 / 50f) +  ((acceleration.y) * (1/50f) * (1 / 50f)) /2);
+            transform.position += new Vector3(0, velocity.y * (1 / 50f) + ((acceleration.y) * (1 / 50f) * (1 / 50f)) / 2);//if there is error, mass is probably 0
+
     }
     void MoveObjectOnXAxis()//if acceleration.x is 0 its motion velocity doesnt change. first low of newton.
     {
@@ -58,7 +60,7 @@ public class MyRigidBody2D : MonoBehaviour
 
     private void UpdateVelocityValue()
     {
-        velocity += acceleration * Time.deltaTime;
+        velocity += acceleration * (1 / 50f);
     }
 
     public void CalculateForcesAndAcceleration(MyRigidBody2D myRigidBody2D,MyBoxCollider2D myBoxCollider2D) 

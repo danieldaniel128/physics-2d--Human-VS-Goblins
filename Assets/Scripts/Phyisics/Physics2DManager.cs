@@ -137,7 +137,7 @@ public class Physics2DManager : MonoBehaviour
         Vector2 r2Velocity = Vector2.zero; // Floor has no velocity
         // Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
         Vector2 collisionNormal = Vector2.up;
-        if (c2.transform.position.y + c2.HeightUpAndOffset / 2 >= c1.transform.position.y)
+        if (c2.transform.position.y + c2.HeightUpAndOffset / 2 >= c1.transform.position.y)//somthing doesnt work here
                     collisionNormal = Vector2.right;
         Vector2 relativeVelocity = r1Velocity - r2Velocity;
         float impulseMagnitude = (-(1 + restitution) * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass)));

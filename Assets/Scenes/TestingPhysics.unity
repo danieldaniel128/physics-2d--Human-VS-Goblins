@@ -4125,6 +4125,7 @@ GameObject:
   - component: {fileID: 1593941295}
   - component: {fileID: 1593941294}
   - component: {fileID: 1593941296}
+  - component: {fileID: 1593941297}
   m_Layer: 0
   m_Name: PackVillage01_53
   m_TagString: Untagged
@@ -4173,7 +4174,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300106, guid: e48ddf4fb7304ce4ab48711eb6617a57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1e8ff1efe109f64d8d15c4c1a386d86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4192,7 +4193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593941293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.14, y: -2.4772036, z: 0}
+  m_LocalPosition: {x: -15.47, y: -1.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4215,11 +4216,28 @@ MonoBehaviour:
   Height: 1.08
   WidthOffSet: 0
   HeightOffSet: 0
-  Mass: 0
+  Mass: 4
   CollidedTimer: 0
   isColliding: 0
   staticObject: 0
   FirstCollisionEnter: 0
+--- !u!114 &1593941297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593941293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138e911c4a5a5e04cb0a9c9a532687e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
+  acceleration: {x: 0, y: 0}
+  gravity: 10
+  x: 0
+  y: 0
 --- !u!1 &1611440765
 GameObject:
   m_ObjectHideFlags: 0
