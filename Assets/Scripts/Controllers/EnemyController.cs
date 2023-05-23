@@ -12,9 +12,10 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         enemyRigidBody.AddForce(_enemySpeed * Vector2.left);
-        enemyCollider.OnCollision += OnMyCollisionEnter2D;
+        enemyCollider.OnCollisionEnter += OnMyCollisionEnter2D;
+        enemyCollider.OnCollisionExit += OnMyCollisionExit2D;
     }
-    void OnMyCollisionEnter2D(MyBoxCollider2D collider) 
+    void OnMyCollisionExit2D(MyBoxCollider2D collider) 
     {
        
         if (collider.tag.Equals("Castle"))
@@ -25,6 +26,18 @@ public class EnemyController : MonoBehaviour
         {
             EnemyHealth.GotHurt(GameManager.Instance.PlayerCastleHealth.Damage);
         }
+        //enemyCollider.OnCollisionEnter
+    }
+    void OnMyCollisionEnter2D(MyBoxCollider2D collider)
+    {
+        collider.SetOnCollisionWith(CanCollideWithCollider);
+    }
+
+    bool CanCollideWithCollider(MyBoxCollider2D collider)//true is cant, false is not
+    {
+        if (collider.tag.Contains("Enemy"))
+            return false;
+        return true;
     }
 
 }

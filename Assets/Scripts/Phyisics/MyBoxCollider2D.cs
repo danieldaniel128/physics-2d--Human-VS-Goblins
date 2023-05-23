@@ -14,7 +14,9 @@ public class MyBoxCollider2D : MonoBehaviour
     public float HeightUpAndOffset => Height + HeightOffSet;
     public float HeightDownAndOffset => Height - HeightOffSet;
     public float RotationAngle => transform.rotation.eulerAngles.z;
-    public event Action<MyBoxCollider2D> OnCollision;
+    public event Action<MyBoxCollider2D> OnCollisionExit;
+    public event Action<MyBoxCollider2D> OnCollisionEnter;
+    public Predicate<MyBoxCollider2D> OnCollisionWith;
 
     public float CollidedTimer;
 
@@ -185,10 +187,18 @@ public class MyBoxCollider2D : MonoBehaviour
 
         return false;
     }
-    public void InvokeOnCollision(MyBoxCollider2D collider)
+    public void InvokeOnCollisionExit(MyBoxCollider2D collider)
     {
         FirstCollisionEnter = true;
-        OnCollision?.Invoke(collider);
+        OnCollisionExit?.Invoke(collider);
+    }
+    public void InvokeOnCollisionEnter(MyBoxCollider2D collider)
+    {
+        OnCollisionEnter?.Invoke(collider);
+    }
+    public void SetOnCollisionWith(Predicate<MyBoxCollider2D> predicate1)
+    {
+        OnCollisionWith = predicate1;
     }
 
     #region Ai Tests

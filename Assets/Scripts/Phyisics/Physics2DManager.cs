@@ -93,24 +93,29 @@ public class Physics2DManager : MonoBehaviour
                         //bool collisionFromRightToLeft = c1PreviousPosition.x > c2PreviousPosition.x;
                         if (!c1.staticObject && c2.staticObject)
                         {
-                            CollisionImpactStaticObject(c1, c2); // One moving, one static
-                                c1.InvokeOnCollision(c2);
-                                c2.InvokeOnCollision(c1);
+                                CollisionImpactStaticObject(c1, c2); // One moving, one static
+                                c1.InvokeOnCollisionExit(c2);//after collision effect, invoke.(in future, can be added event invoked before collision)
+                                c2.InvokeOnCollisionExit(c1);
                         }
                         else if (!c1.staticObject && !c2.staticObject)
-                            // Handle the collision based on the direction
-                            if (collisionFromLeftToRight)
-                            {
-                                CollisionImpact(c1, c2, collisionFromLeftToRight); // Both moving
-                                    c1.InvokeOnCollision(c2);
-                                    c2.InvokeOnCollision(c1);
-                            }
-                            else
-                            {
-                                CollisionImpact(c2, c1, collisionFromLeftToRight); // Both moving
-                                    c1.InvokeOnCollision(c2);
-                                    c2.InvokeOnCollision(c1);
-                            }
+                        // Handle the collision based on the direction
+                        {
+                            c1.InvokeOnCollisionEnter(c2);
+                            c2.InvokeOnCollisionEnter(c1);
+                            if (c1.OnCollisionWith != null && c2.OnCollisionWith!=null && (c1.OnCollisionWith(c2)|| c2.OnCollisionWith(c1)))
+                                if (collisionFromLeftToRight)
+                                {
+                                    CollisionImpact(c1, c2, collisionFromLeftToRight); // Both moving
+                                        c1.InvokeOnCollisionExit(c2);
+                                        c2.InvokeOnCollisionExit(c1);
+                                }
+                                else
+                                {
+                                    CollisionImpact(c2, c1, collisionFromLeftToRight); // Both moving
+                                        c1.InvokeOnCollisionExit(c2);
+                                        c2.InvokeOnCollisionExit(c1);
+                                }
+                        }
 
                         c1.isColliding = true;
                         c2.isColliding = true;
