@@ -30,12 +30,12 @@ public class EnemyController : MonoBehaviour
     }
     void OnMyCollisionEnter2D(MyBoxCollider2D collider)
     {
-        collider.SetOnCollisionWith(CanCollideWithCollider);
+        enemyCollider.SetOnCollisionWith(CanCollideWithCollider);
     }
 
     bool CanCollideWithCollider(MyBoxCollider2D collider)//true is cant, false is not
     {
-        if (collider.tag.Contains("Enemy"))
+        if (collider.tag.Contains("Enemy") && enemyCollider.tag.Contains("Enemy"))
             return false;
         return true;
     }

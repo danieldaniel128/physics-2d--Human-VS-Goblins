@@ -18,11 +18,11 @@ public class MinerController : MonoBehaviour
     //}
     void OnMyCollisionEnter2D(MyBoxCollider2D collider)
     {
-        collider.SetOnCollisionWith(CanCollideWithCollider);
+        minerCollider.SetOnCollisionWith(CanCollideWithCollider);
     }
     bool CanCollideWithCollider(MyBoxCollider2D collider)//true is cant, false is not
     {
-        if (collider.tag.Contains("Miner"))
+        if (minerCollider.tag.Contains("Miner") && collider.tag.Contains("Miner"))
             return false;
         return true;
     }
