@@ -138,7 +138,10 @@ public class Physics2DManager : MonoBehaviour
         // Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
         Vector2 collisionNormal = Vector2.up;
         if (c2.transform.position.y + c2.HeightUpAndOffset / 2 >= c1.transform.position.y)//somthing doesnt work here
-                    collisionNormal = Vector2.right;
+            if(c2.transform.position.x >= c1.transform.position.x)    
+                collisionNormal = Vector2.right;
+            else
+                collisionNormal = Vector2.left;
         Vector2 relativeVelocity = r1Velocity - r2Velocity;
         float impulseMagnitude = (-(1 + restitution) * Vector2.Dot(relativeVelocity, collisionNormal) / ((1 / c1.Mass) + (1 / c2.Mass)));
         Vector2 impulse = impulseMagnitude * collisionNormal;
@@ -148,7 +151,11 @@ public class Physics2DManager : MonoBehaviour
         if(collisionNormal.y!=0)
             r1.transform.position =  new Vector3(r1.transform.position.x,c2.transform.position.y + c2.HeightUpAndOffset / 2 + c1.HeightUpAndOffset / 2);
         else
-            r1.transform.position = new Vector3(c2.transform.position.x + c2.WidthRightAndOffset / 2 +c1.WidthRightAndOffset / 2, c1.transform.position.y);
+            if(c2.transform.position.x >= c1.transform.position.x)
+                r1.transform.position = new Vector3(c2.transform.position.x - c2.WidthRightAndOffset / 2 - c1.WidthRightAndOffset / 2, c1.transform.position.y);
+            else
+                r1.transform.position = new Vector3(c2.transform.position.x + c2.WidthRightAndOffset / 2 +c1.WidthRightAndOffset / 2, c1.transform.position.y);
+
     }
 
     void CollisionImpact(MyBoxCollider2D c1, MyBoxCollider2D c2,bool collisionFromLeftToRight)
