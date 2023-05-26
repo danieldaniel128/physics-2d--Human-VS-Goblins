@@ -20,7 +20,6 @@ public class HealthBarFollow : MonoBehaviour
     {
         // Update the position of the health bar to match the enemy's position
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(TargetTransform.position + Vector3.right * xOffset + Vector3.up * yOffset);
-        //healthBarRectTransform.position = Camera.main.WorldToViewportPoint(TargetTransform.position + Vector3.right * xOffset + Vector3.up * yOffset);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(healthBarCanvas.transform as RectTransform, screenPosition, healthBarCanvas.worldCamera, out Vector2 canvasPosition);
 
 
