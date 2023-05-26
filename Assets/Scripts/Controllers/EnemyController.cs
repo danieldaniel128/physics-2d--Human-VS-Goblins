@@ -6,15 +6,35 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] MyBoxCollider2D enemyCollider;
     [SerializeField] MyRigidBody2D enemyRigidBody;
+    
     [SerializeField] float _enemySpeed;
+    public float EnemySpeed { get { return _enemySpeed; } private set { _enemySpeed = value; } }
     public Health EnemyHealth { get; set; }
+    public HealthBarFollow HealthBarFollow;
+
+    [SerializeField] float _timer;
+    [SerializeField] float _cooldownToGoBackToCastle;
+    bool _isTargetingCastle = true;
 
     private void Start()
     {
-        enemyRigidBody.AddForce(_enemySpeed * Vector2.left);
         enemyCollider.OnCollisionEnter += OnMyCollisionEnter2D;
         enemyCollider.OnCollisionExit += OnMyCollisionExit2D;
+        EnemyHealth.OnDeath += OnEnemiesDeath;
     }
+    private void FixedUpdate()
+    {
+            MoveTowardsCastle();
+        if (!_isTargetingCastle)
+            TimerToChargeCastle();
+
+    }
+
+    void MoveTowardsCastle() 
+    {
+        enemyRigidBody.velocity = new Vector2(_enemySpeed, enemyRigidBody.velocity.y); //speed directed to castle
+    }
+
     void OnMyCollisionExit2D(MyBoxCollider2D collider) 
     {
        
@@ -24,12 +44,20 @@ public class EnemyController : MonoBehaviour
         }
         if (collider.tag.Equals("PlayersWeapon"))
         {
+            Physics2DManager.Instance._myBoxColliders2D.Remove(collider);
+            Destroy(collider.gameObject);
             EnemyHealth.GotHurt(GameManager.Instance.PlayerCastleHealth.Damage);
         }
         //enemyCollider.OnCollisionEnter
     }
     void OnMyCollisionEnter2D(MyBoxCollider2D collider)
     {
+        if (collider.tag.Equals("Castle"))
+        {
+            transform.position += Vector3.right*0.1f;
+            _enemySpeed *= -1;
+            _isTargetingCastle =false;
+        }
         enemyCollider.SetOnCollisionWith(CanCollideWithCollider);
     }
 
@@ -38,6 +66,23 @@ public class EnemyController : MonoBehaviour
         if (collider.tag.Contains("Enemy") && enemyCollider.tag.Contains("Enemy"))
             return false;
         return true;
+    }
+    void TimerToChargeCastle() 
+    {
+        _timer += (1/50f);
+        if(_timer >= _cooldownToGoBackToCastle)
+        {
+            _enemySpeed *= -1;
+            _timer = 0;
+            _isTargetingCastle = true;
+        }
+    }
+
+    private void OnEnemiesDeath() 
+    {
+        Destroy(this.HealthBarFollow.gameObject);
+        Physics2DManager.Instance._myBoxColliders2D.Remove(enemyCollider);
+        Destroy(gameObject);
     }
 
 }

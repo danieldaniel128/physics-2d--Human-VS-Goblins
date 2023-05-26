@@ -101,7 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCollider: {fileID: 6418971977691897573}
   enemyRigidBody: {fileID: 8745335390036920828}
-  _enemySpeed: 0
+  _enemySpeed: -2
+  HealthBarFollow: {fileID: 0}
+  _timer: 0
+  _cooldownToGoBackToCastle: 0.5
 --- !u!114 &8745335390036920828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138e911c4a5a5e04cb0a9c9a532687e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: -2, y: 0}
+  velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
   gravity: 10
   x: 0

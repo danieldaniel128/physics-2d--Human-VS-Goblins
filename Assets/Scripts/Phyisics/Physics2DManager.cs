@@ -76,9 +76,9 @@ public class Physics2DManager : MonoBehaviour
     {
         if (_myBoxColliders2D.Count >= 2)
         {
-            foreach (var c1 in _myBoxColliders2D)
+            foreach (var c1 in _myBoxColliders2D.ToList())
             {
-                foreach (var c2 in _myBoxColliders2D)
+                foreach (var c2 in _myBoxColliders2D.ToList())
                 {
                     if (c1 == c2)
                         continue;

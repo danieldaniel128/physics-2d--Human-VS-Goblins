@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 
     public class Health
     {
-        public float CurrnetHP { get; set; }
+        float _currnetHP;
+        public float CurrnetHP { get => _currnetHP; set { _currnetHP = value; if (_currnetHP == 0) OnDeath?.Invoke(); } }
         public float MaxHP { get; set; } = 100;
         public float Damage { get; set; }
         public Image ImageHealthBar { get; set; }
@@ -21,7 +23,7 @@ using UnityEngine.UI;
             Damage = damage;
             ImageHealthBar = image;
         }
-
+        
 
         public void GotHurt(float dealedDamage) 
         {

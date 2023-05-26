@@ -43,7 +43,10 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemyHealthBar = Instantiate(healthBarPrefab, enemiesHealthBarsParents);
         HealthBarFollow healthBarFollow = enemyHealthBar.GetComponent<HealthBarFollow>();
         UIManager.Instance.EnemyHealthBarAdded(healthBarFollow.HealthBarImage);
-        enemyInstance.GetComponent<EnemyController>().EnemyHealth = new Health(healthBarFollow.HealthBarImage, _enemyDamage);
+
+        EnemyController enemyController = enemyInstance.GetComponent<EnemyController>();
+        enemyController.EnemyHealth = new Health(healthBarFollow.HealthBarImage, _enemyDamage);
+        enemyController.HealthBarFollow = healthBarFollow;
         healthBarFollow.TargetTransform = enemyInstance.transform;
         healthBarFollow.yOffset = yOffset;
         healthBarFollow.yOffset = yOffset;
