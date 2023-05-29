@@ -1968,9 +1968,10 @@ GameObject:
   - component: {fileID: 621518711}
   - component: {fileID: 621518710}
   - component: {fileID: 621518709}
+  - component: {fileID: 621518712}
   m_Layer: 0
   m_Name: Miner2
-  m_TagString: Untagged
+  m_TagString: Miner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2002,7 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138e911c4a5a5e04cb0a9c9a532687e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: -1, y: 0}
+  velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
   gravity: 10
   x: 0
@@ -2080,6 +2081,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &621518712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621518707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52369f09d6f8d2469474b430428c39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minerCollider: {fileID: 621518710}
+  minerRigidBody: {fileID: 621518709}
+  _minerSpeed: -1
 --- !u!1 &647981268
 GameObject:
   m_ObjectHideFlags: 0
@@ -4643,7 +4659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1344753813
 Transform:
   m_ObjectHideFlags: 0
@@ -5191,9 +5207,10 @@ GameObject:
   - component: {fileID: 1593941294}
   - component: {fileID: 1593941296}
   - component: {fileID: 1593941297}
+  - component: {fileID: 1593941298}
   m_Layer: 0
   m_Name: Miner1
-  m_TagString: Untagged
+  m_TagString: Miner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5298,11 +5315,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138e911c4a5a5e04cb0a9c9a532687e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 1, y: 0}
+  velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
   gravity: 10
   x: 0
   y: 0
+--- !u!114 &1593941298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593941293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52369f09d6f8d2469474b430428c39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minerCollider: {fileID: 1593941296}
+  minerRigidBody: {fileID: 1593941297}
+  _minerSpeed: -1
 --- !u!1 &1611440765
 GameObject:
   m_ObjectHideFlags: 0
@@ -5988,7 +6020,7 @@ GameObject:
   - component: {fileID: 1867278772}
   m_Layer: 0
   m_Name: middle_lane_rock2_4
-  m_TagString: Untagged
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6655,9 +6687,10 @@ GameObject:
   - component: {fileID: 2110772815}
   - component: {fileID: 2110772814}
   - component: {fileID: 2110772813}
+  - component: {fileID: 2110772816}
   m_Layer: 0
   m_Name: Miner3
-  m_TagString: Untagged
+  m_TagString: Miner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6689,7 +6722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138e911c4a5a5e04cb0a9c9a532687e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 1, y: 0}
+  velocity: {x: 0, y: 0}
   acceleration: {x: 0, y: 0}
   gravity: 10
   x: 0
@@ -6767,6 +6800,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2110772816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110772811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52369f09d6f8d2469474b430428c39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minerCollider: {fileID: 2110772814}
+  minerRigidBody: {fileID: 2110772813}
+  _minerSpeed: -1
 --- !u!1 &2121242326
 GameObject:
   m_ObjectHideFlags: 0

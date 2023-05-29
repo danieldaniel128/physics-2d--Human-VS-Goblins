@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - PlayersWeapon
   - Miner
+  - Mine
   layers:
   - Default
   - TransparentFX
