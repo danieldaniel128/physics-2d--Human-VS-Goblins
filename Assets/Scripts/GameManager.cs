@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     public Health PlayerCastleHealth { get; set; }//can get damage through health
     [SerializeField] private Image _castleHealthBarImage;
+    public Health EnemyCastleHealth { get; set; }//can get damage through health
+    [SerializeField] private Image _enemyCastleHealthBarImage;
+
     [SerializeField] private float _playerDamage;
 
     private void Awake()
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PlayerCastleHealth = new Health(_castleHealthBarImage, _playerDamage);
+        EnemyCastleHealth = new Health(_enemyCastleHealthBarImage);
     }
 
 }

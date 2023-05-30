@@ -10,6 +10,7 @@ TagManager:
   - PlayersWeapon
   - Miner
   - Mine
+  - Knight
   layers:
   - Default
   - TransparentFX
