@@ -10,7 +10,7 @@ public class KnightConroller : MonoBehaviour//make abstract class later
     [SerializeField] float _knightSpeed;
     public float KnightSpeed { get { return _knightSpeed; } private set { _knightSpeed = value; } }
     public Health KnightHealth { get; set; }
-    public HealthBarFollow HealthBarFollow;
+    public HealthBarFollow KnightHealthBarFollow;
 
     [SerializeField] float _timer;
     [SerializeField] float _cooldownToGoBackToCastle;
@@ -20,7 +20,7 @@ public class KnightConroller : MonoBehaviour//make abstract class later
     {
         _knightCollider.OnCollisionEnter += OnMyCollisionEnter2D;
         _knightCollider.OnCollisionExit += OnMyCollisionExit2D;
-        KnightHealth = new Health(HealthBarFollow.HealthBarImage);
+        KnightHealth = new Health(KnightHealthBarFollow.HealthBarImage);
         KnightHealth.OnDeath += OnEnemiesDeath;
     }
     private void FixedUpdate()
@@ -45,7 +45,7 @@ public class KnightConroller : MonoBehaviour//make abstract class later
         }
         if (collider.tag.Equals("Goblin"))
         {
-            KnightHealth.GotHurt(GameManager.Instance.PlayerCastleHealth.Damage);
+            KnightHealth.GotHurt(collider.GetComponent<EnemyController>().EnemyHealth.Damage);
         }
         //enemyCollider.OnCollisionEnter
     }
@@ -79,7 +79,7 @@ public class KnightConroller : MonoBehaviour//make abstract class later
 
     private void OnEnemiesDeath()
     {
-        Destroy(this.HealthBarFollow.gameObject);
+        Destroy(this.KnightHealthBarFollow.gameObject);
         Physics2DManager.Instance._myBoxColliders2D.Remove(_knightCollider);
         Destroy(gameObject);
     }
