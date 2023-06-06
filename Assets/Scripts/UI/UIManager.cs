@@ -10,10 +10,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public event Action< Image, float, float> UpdateHealthBarImageEvent;
-
-
     [SerializeField] private int _weaponCost, _catapultCost, _knightCost, _minerCost;
-
+    [SerializeField] private int _weaponUpdateLevel , _catapultUpdateLevel, _knightUpdateLevel, _minerUpdateLevel;
 
 
 
