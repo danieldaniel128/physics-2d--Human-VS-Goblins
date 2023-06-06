@@ -31,7 +31,8 @@ public class MinerController : MonoBehaviour
                 MinerSpeed *= -1;
                 transform.position += Vector3.left * 0.05f;
                 transform.Rotate(0, 180, 0);
-        }
+                Debug.Log(UpgradeSystem.CurrentCoins += 5);
+            }
             else if (collider.tag.Equals("Mine"))
             {
                 MinerSpeed *= -1;

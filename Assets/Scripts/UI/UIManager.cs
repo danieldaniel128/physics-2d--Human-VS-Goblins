@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
@@ -13,6 +14,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int _weaponCost, _catapultCost, _knightCost, _minerCost;
     [SerializeField] private int _weaponUpdateLevel , _catapultUpdateLevel, _knightUpdateLevel, _minerUpdateLevel;
 
+
+    [SerializeField] private TextMeshProUGUI Coins_TXT;
+
+    public void UpdateCoinsTextUI(int coins)
+    {
+        Coins_TXT.text = $"Coins: {coins}";
+    }
 
 
     private void Awake()

@@ -4,8 +4,16 @@ using UnityEngine;
 
 public static class UpgradeSystem
 {
-   
-    public static int CurrentCoins { get; set; }
+    static int _currentCoins;
+    public static int CurrentCoins 
+    {
+        get => _currentCoins;
+        set
+        {
+            _currentCoins = value;
+            UIManager.Instance.UpdateCoinsTextUI(_currentCoins);
+        } 
+    }
 
     public static bool CanUpgrade(int cost,int currentMoney) 
     {
@@ -16,6 +24,14 @@ public static class UpgradeSystem
     {
         levelUpgrade += 1;
     }
+
+    public static void UpgradeTheLevelUpgrade(this LevelUpgrade levelUpgrade)
+    {
+        if((int)levelUpgrade<3)
+            levelUpgrade += 1;
+    }
+
+
 }
     public enum LevelUpgrade
     {
