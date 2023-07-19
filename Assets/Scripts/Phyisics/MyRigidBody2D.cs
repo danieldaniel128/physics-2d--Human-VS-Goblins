@@ -63,11 +63,6 @@ public class MyRigidBody2D : MonoBehaviour
         velocity += acceleration * (1 / 50f);
     }
 
-    public void CalculateForcesAndAcceleration(MyRigidBody2D myRigidBody2D,MyBoxCollider2D myBoxCollider2D) 
-    {
-        
-    }
-
     private void UpdateXYValues()
     {
         x=transform.position.x;

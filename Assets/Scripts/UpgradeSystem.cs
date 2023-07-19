@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public static class UpgradeSystem
@@ -14,10 +13,10 @@ public static class UpgradeSystem
         {
             _currentCoins = value;
             UIManager.Instance.UpdateCoinsTextUI(_currentCoins);
-            IsUpgradeable();
+            CheckForUpgrades();
         } 
     }
-    private static void IsUpgradeable()
+    private static void CheckForUpgrades()
     {
         foreach (UpgradeData upgradeData in UIManager.Instance.UpgradeDatas)
             if (upgradeData.CurrentUpgradeLevel != LevelUpgradeEnum.High && CanUpgrade(upgradeData.UpgradeCost))

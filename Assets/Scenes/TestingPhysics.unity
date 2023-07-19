@@ -2182,6 +2182,7 @@ MonoBehaviour:
   minerCollider: {fileID: 621518710}
   minerRigidBody: {fileID: 621518709}
   _minerSpeed: -1.3
+  _minerMinePower: 0
 --- !u!1 &647981268
 GameObject:
   m_ObjectHideFlags: 0
@@ -3915,7 +3916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f787486ce8cbd4c855b650bbc6c681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemiesNumber: 1
+  EnemiesNumber: 3
   _enemyDamage: 5
   _spawnTimer: 0
   _spawnCooldown: 2
@@ -5751,6 +5752,7 @@ MonoBehaviour:
   minerCollider: {fileID: 1593941296}
   minerRigidBody: {fileID: 1593941297}
   _minerSpeed: -1.3
+  _minerMinePower: 0
 --- !u!1 &1611440765
 GameObject:
   m_ObjectHideFlags: 0
@@ -6623,7 +6625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f487814276458c42bd2498073a5f181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KnightsNumber: 0
+  KnightsNumber: 3
   _knightDamage: 5
   _spawnTimer: 0
   _spawnCooldown: 2
@@ -7393,6 +7395,7 @@ MonoBehaviour:
   minerCollider: {fileID: 2110772814}
   minerRigidBody: {fileID: 2110772813}
   _minerSpeed: -1.3
+  _minerMinePower: 0
 --- !u!1 &2121242326
 GameObject:
   m_ObjectHideFlags: 0
