@@ -38,11 +38,11 @@ public class EnemyController : MonoBehaviour
     void OnMyCollisionExit2D(MyBoxCollider2D collider) 
     {
        
-        if (collider.tag.Equals("Castle"))
+        if (collider.CompareTag("Castle"))
         {
              GameManager.Instance.PlayerCastleHealth.GotHurt(EnemyHealth.Damage);//do it so it will get health and do the logic of values inside instead of getting damage
         }
-        if (collider.tag.Equals("PlayersWeapon"))
+        if (collider.CompareTag("PlayersWeapon"))
         {
             Physics2DManager.Instance._myBoxColliders2D.Remove(collider);
             Destroy(collider.gameObject);
@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
     }
     void OnMyCollisionEnter2D(MyBoxCollider2D collider)
     {
-        if (collider.tag.Equals("Castle"))
+        if (collider.CompareTag("Castle"))
         {
             transform.position += Vector3.right*0.1f;
             _enemySpeed *= -1;
@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
 
     bool CanCollideWithCollider(MyBoxCollider2D collider)//true is cant, false is not
     {
-        if (collider.tag.Contains("Enemy") && enemyCollider.tag.Contains("Enemy"))
+        if (collider.CompareTag("Enemy") && enemyCollider.CompareTag("Enemy"))
             return false;
         return true;
     }

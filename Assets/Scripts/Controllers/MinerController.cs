@@ -55,7 +55,7 @@ public class MinerController : MonoBehaviour
     }
     bool CanCollideWithCollider(MyBoxCollider2D collider)//true is cant, false is not
     {
-        if (minerCollider.tag.Contains("Miner") && collider.tag.Contains("Miner"))
+        if (minerCollider.CompareTag("Miner") && collider.CompareTag("Miner"))
             return false;
         return true;
     }

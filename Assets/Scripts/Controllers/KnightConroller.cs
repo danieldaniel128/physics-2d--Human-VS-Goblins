@@ -28,7 +28,6 @@ public class KnightConroller : MonoBehaviour//make abstract class later
         MoveTowardsCastle();
         if (!_isTargetingCastle)
             TimerToChargeCastle();
-
     }
 
     void MoveTowardsCastle()
@@ -62,7 +61,7 @@ public class KnightConroller : MonoBehaviour//make abstract class later
 
     bool CanCollideWithCollider(MyBoxCollider2D collider)//true is cant, false is not
     {
-        if (collider.tag.Contains("Knight") && _knightCollider.tag.Contains("Knight"))
+        if (collider.CompareTag("Knight") && _knightCollider.CompareTag("Knight"))
             return false;
         return true;
     }

@@ -12,7 +12,7 @@ public enum UpgradeEntityEnum
 }
 public class UpgradeData
 {
-    public Guid Upgrade_BTN_ID { get; set; }
+    public Guid Upgrade_BTN_ID { get; set; }//didnt use, but can be in a dictionary
     public int BTNIndex { get; set; }
     public LevelUpgradeEnum CurrentUpgradeLevel { get; set; }
     public UpgradeEntityEnum UpgradeEntity { get; set; }
