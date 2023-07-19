@@ -89,37 +89,7 @@ public class MyBoxCollider2D : MonoBehaviour
             //isColliding=true;
             return true; //CheckLineSegmentIntersection(otherCollider);
         }
-        //if (Mathf.Max(Height / 2, Width / 2) == Width / 2)
-        //{
-        //    Vector2[] collisionCorners = otherCollider.GetCornerPoints();
-        //    foreach (var item in collisionCorners)
-        //    {
-        //        float DistanceFromCorner = Vector2.Distance(item, transform.position);//(6.63, -0.41)
-        //        if (DistanceFromCorner <= Width / 2 || DistanceFromCorner <= Height / 2)
-        //        {
-        //            if (DistanceFromCorner <= Height / 2)
-        //            {
-        //                Debug.Log("works");
-        //                return true;
-        //            }
-        //        }
-        //    }
-
-        //}
-        //else
-        //    foreach (var item in otherCollider.GetCornerPoints())
-        //    {
-        //        float DistanceFromCorner = Vector2.Distance(item, transform.position);//(3.32, -0.17)
-        //        if (DistanceFromCorner <= Width / 2 || DistanceFromCorner <= Height / 2)
-        //        {
-        //            if (DistanceFromCorner <= Width / 2)
-        //            {
-        //                Debug.Log("works");
-        //                return true;
-        //            }
-        //        }
-        //    }
-
+       
         return false;
     }
 
@@ -139,54 +109,9 @@ public class MyBoxCollider2D : MonoBehaviour
     }
 
 
-    private bool CheckLineSegmentIntersection(MyBoxCollider2D other)
-    {
-        // Calculate the corners of the two colliders
-        Vector2[] cornersA = GetCornerPoints();
-        Vector2[] cornersB = other.GetCornerPoints();
+    
 
-        // Loop over each line segment of the two colliders and check for intersection
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                if (LineSegmentIntersection(cornersA[i], cornersA[(i + 1) % 4], cornersB[j], cornersB[(j + 1) % 4]))
-                {
-                    return true; // Intersection found
-                }
-            }
-        }
-
-        return false; // No intersection found
-    }
-
-    private bool LineSegmentIntersection(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4)
-    {
-        // Calculate the line segment parameters
-        Vector2 dirA = p2 - p1;
-        Vector2 dirB = p4 - p3;
-        float den = dirA.x * dirB.y - dirA.y * dirB.x;
-
-        // Check if the line segments are parallel or coincident
-        const float epsilon = 0.0001f;
-        if (Mathf.Abs(den) < epsilon)
-        {
-            return false;
-        }
-
-        // Calculate the intersection point parameters
-        Vector2 diff = p1 - p3;
-        float t = (diff.x * dirB.y - diff.y * dirB.x) / den;
-        float u = (diff.x * dirA.y - diff.y * dirA.x) / den;
-
-        // Check if the intersection point is within the line segments
-        if (t >= 0f && t <= 1f && u >= 0f && u <= 1f)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    
     public void InvokeOnCollisionExit(MyBoxCollider2D collider)
     {
         FirstCollisionEnter = true;
@@ -200,57 +125,6 @@ public class MyBoxCollider2D : MonoBehaviour
     {
         OnCollisionWith = predicate1;
     }
-
-    #region Ai Tests
-    //public bool CheckCollision(MyBoxCollider2D otherCollider)
-    //{
-    //    Vector2[] cornersA = GetCornerPoints();
-    //    Vector2[] cornersB = otherCollider.GetCornerPoints();
-
-    //    for (int i = 0; i < cornersA.Length; i++)
-    //    {
-    //        for (int j = 0; j < cornersB.Length; j++)
-    //        {
-    //            if (CheckPointInsideCollider(cornersA[i], otherCollider) ||
-    //                CheckPointInsideCollider(cornersB[j], this))
-    //            {
-    //                Debug.Log("Collision detected");
-    //                return true;
-    //            }
-    //        }
-    //    }
-
-    //    return false;
-    //}
-
-    private bool CheckPointInsideCollider(Vector2 point, MyBoxCollider2D collider)
-    {
-        Vector2[] corners = collider.GetCornerPoints();
-        Vector2 v0 = corners[corners.Length - 1];
-        bool isInside = false;
-
-        for (int i = 0; i < corners.Length; i++)
-        {
-            Vector2 v1 = corners[i];
-            Vector2 v2 = corners[(i + 1) % corners.Length];
-
-            if (IsPointOnLeftSide(point, v0, v1) != IsPointOnLeftSide(point, v1, v2))
-            {
-                isInside = !isInside;
-            }
-
-            v0 = v1;
-        }
-
-        return isInside;
-    }
-
-    private bool IsPointOnLeftSide(Vector2 point, Vector2 lineStart, Vector2 lineEnd)
-    {
-        return ((lineEnd.x - lineStart.x) * (point.y - lineStart.y) -
-                (lineEnd.y - lineStart.y) * (point.x - lineStart.x)) > 0f;
-    }
-    #endregion
 
 
 }
