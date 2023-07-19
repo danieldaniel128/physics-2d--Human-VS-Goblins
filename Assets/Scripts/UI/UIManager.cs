@@ -13,9 +13,10 @@ public class UIManager : MonoBehaviour
     public event Action< Image, float, float> UpdateHealthBarImageEvent;
     [SerializeField] private int _weaponCost, _catapultCost, _knightCost, _minerCost;
     [SerializeField] private int _weaponUpdateLevel , _catapultUpdateLevel, _knightUpdateLevel, _minerUpdateLevel;
-
-
+    //[SerializeField] Button _catapultBtn , _weaponBtn , _knightBtn, _minerBtn;
+    [SerializeField] List<Button> _upgradeBtns;
     [SerializeField] private TextMeshProUGUI Coins_TXT;
+    public List<UpgradeData> UpgradeDatas;
 
     public void UpdateCoinsTextUI(int coins)
     {
@@ -32,8 +33,37 @@ public class UIManager : MonoBehaviour
     }
 
 
-    
+    private void Start()
+    {
+        UpgradeDataInit();
+    }
 
+    public void BuyUpgrade(int btnIndex)
+    {
+        UpgradeSystem.BuyUpgrade(btnIndex);
+    }
+
+    public void SwitchBTNInteractToOn(int buttonIndex)
+    {
+        _upgradeBtns[buttonIndex].interactable = true;
+    }
+    public void SwitchBTNInteractToOff(int buttonIndex)
+    {
+        _upgradeBtns[buttonIndex].interactable = false;
+    }
+    public void SwitchBTNInteractToToggle(int buttonIndex)//Optional
+    {
+        _upgradeBtns[buttonIndex].interactable = !_upgradeBtns[buttonIndex].interactable;
+    }
+
+    private void UpgradeDataInit()
+    {
+        UpgradeDatas = new List<UpgradeData>();
+        UpgradeDatas.Add(new UpgradeData(0,UpgradeEntityEnum.Weapon));
+        UpgradeDatas.Add(new UpgradeData(1,UpgradeEntityEnum.Knight));
+        UpgradeDatas.Add(new UpgradeData(2,UpgradeEntityEnum.Miner));
+        UpgradeDatas.Add(new UpgradeData(3,UpgradeEntityEnum.Catapult));
+    }
 
     public void InvokeUpdateHealthBar(Image image, float newHealth , float maxHealth)
     {
@@ -43,23 +73,4 @@ public class UIManager : MonoBehaviour
     {
         healthBar.fillAmount = newHealth/maxHealth;
     }
-
-
-    public void UpgradeWeapon() 
-    {
-        UpgradeSystem.CanUpgrade(_weaponCost,0);
-    }
-    public void UpgradeCatapolt()
-    {
-        UpgradeSystem.CanUpgrade(_catapultCost,0);
-    }
-    public void UpgradeKnight()
-    {
-        UpgradeSystem.CanUpgrade(_knightCost,0);
-    }
-    public void UpgradeMiner()
-    {
-        UpgradeSystem.CanUpgrade(_knightCost,0);
-    }
-
 }

@@ -860,7 +860,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 197963567}
   m_OnClick:
     m_PersistentCalls:
@@ -1254,8 +1254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -319.89, y: -2.3099976}
-  m_SizeDelta: {x: -652.06, y: -19.94}
+  m_AnchoredPosition: {x: -315.4, y: -2.3099976}
+  m_SizeDelta: {x: -661.04, y: -19.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330071746
 MonoBehaviour:
@@ -2652,7 +2652,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 756335698}
   m_OnClick:
     m_PersistentCalls:
@@ -2941,7 +2941,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 842537669}
   m_OnClick:
     m_PersistentCalls:
@@ -3957,7 +3957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4464,7 +4464,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1222755190}
   m_OnClick:
     m_PersistentCalls:
@@ -6193,8 +6193,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 320, y: -2.3099976}
-  m_SizeDelta: {x: -652.06, y: -19.94}
+  m_AnchoredPosition: {x: 315.52, y: -2.3099976}
+  m_SizeDelta: {x: -661.02, y: -19.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1771057823
 MonoBehaviour:
