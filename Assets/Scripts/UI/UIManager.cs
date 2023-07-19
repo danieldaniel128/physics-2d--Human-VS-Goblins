@@ -6,17 +6,18 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] Image CastleHealthBarImage;
 
     public static UIManager Instance;
-
     public event Action< Image, float, float> UpdateHealthBarImageEvent;
+    public List<UpgradeData> UpgradeDatas;
+
+    [SerializeField] Image CastleHealthBarImage;
+    
     [SerializeField] private int _weaponCost, _catapultCost, _knightCost, _minerCost;
     [SerializeField] private int _weaponUpdateLevel , _catapultUpdateLevel, _knightUpdateLevel, _minerUpdateLevel;
     //[SerializeField] Button _catapultBtn , _weaponBtn , _knightBtn, _minerBtn;
     [SerializeField] List<Button> _upgradeBtns;
     [SerializeField] private TextMeshProUGUI Coins_TXT;
-    public List<UpgradeData> UpgradeDatas;
 
     public void UpdateCoinsTextUI(int coins)
     {
