@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public static class UpgradeSystem
@@ -18,7 +20,7 @@ public static class UpgradeSystem
     private static void IsUpgradeable()
     {
         foreach (UpgradeData upgradeData in UIManager.Instance.UpgradeDatas)
-            if (CanUpgrade(upgradeData.UpgradeCost))
+            if (upgradeData.CurrentUpgradeLevel != LevelUpgradeEnum.High && CanUpgrade(upgradeData.UpgradeCost))
             {
                 UIManager.Instance.SwitchBTNInteractToOn(upgradeData.BTNIndex);
             }
@@ -35,18 +37,39 @@ public static class UpgradeSystem
     public static void BuyUpgrade(int BtnIndex) 
     {
         CurrentCoins -= UIManager.Instance.UpgradeDatas[BtnIndex].UpgradeCost;
+        if (CurrentCoins < 0)
+            CurrentCoins = 0;
+        UIManager.Instance.UpgradeDatas[BtnIndex].UpgradeTheLevelUpgrade();
         //LevelUpgradeUp
     }
 
-    public static void LevelUpgradeUp(ref LevelUpgradeEnum levelUpgrade)
-    {
-        levelUpgrade += 1;
-    }
+    //public static void LevelUpgradeUp(ref LevelUpgradeEnum levelUpgrade)
+    //{
+    //    levelUpgrade += 1;
+    //}
 
-    public static void UpgradeTheLevelUpgrade(this LevelUpgradeEnum levelUpgrade)
+    public static void UpgradeTheLevelUpgrade(this UpgradeData upgradeData)
     {
-        if((int)levelUpgrade<3)
-            levelUpgrade += 1;
+        if((int)upgradeData.CurrentUpgradeLevel < 3)
+            upgradeData.CurrentUpgradeLevel += 1;
+        switch (upgradeData.UpgradeEntity)
+        {
+            case UpgradeEntityEnum.Weapon:
+                // code block
+                break;
+            case UpgradeEntityEnum.Knight:
+                // code block
+                break;
+            case UpgradeEntityEnum.Catapult:
+                // code block
+                break;
+            case UpgradeEntityEnum.Miner:
+                // code block
+                break;
+            default:
+                // code block
+                break;
+        }
     }
 
 

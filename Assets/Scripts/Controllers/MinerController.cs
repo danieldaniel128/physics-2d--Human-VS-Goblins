@@ -10,6 +10,7 @@ public class MinerController : MonoBehaviour
     [SerializeField] MyRigidBody2D minerRigidBody;
     
     [SerializeField] float _minerSpeed;
+    [SerializeField] float _minerMinePower;//how much coins per mine of miner
     public float MinerSpeed { get { return _minerSpeed; } private set { _minerSpeed = value; } }
 
     private void Start()
