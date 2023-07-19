@@ -42,7 +42,7 @@ public class Physics2DManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        DoManagering();
+        GamePhysicsManagement();
         GameTimer();
     }
     void GameTimer() 
@@ -56,12 +56,12 @@ public class Physics2DManager : MonoBehaviour
         }
     }
 
-    public void DoManagering()
+    public void GamePhysicsManagement()
     {
         CollidersAreTouching();
     }
 
-    public void PrintColliders()
+    public void PrintColliders()//for editor scripts
     {
         foreach (var item in _myBoxColliders2D)
         {
@@ -134,7 +134,7 @@ public class Physics2DManager : MonoBehaviour
         Vector2 r2Velocity = Vector2.zero; // Floor has no velocity
         // Calculate the collision impact assuming a restitution value of 1 and an upward collision normal
         Vector2 collisionNormal = Vector2.up;
-        if (c2.transform.position.y + c2.HeightUpAndOffset / 2 >= c1.transform.position.y)//somthing doesnt work here
+        if (c2.transform.position.y + c2.HeightUpAndOffset / 2 >= c1.transform.position.y)//somthing doesnt work here //fixed :)
             if(c2.transform.position.x >= c1.transform.position.x)    
                 collisionNormal = Vector2.right;
             else
@@ -145,7 +145,7 @@ public class Physics2DManager : MonoBehaviour
 
         // Update the object's velocity
         r1.velocity += impulse / c1.Mass;
-        if(collisionNormal.y!=0)
+        if(collisionNormal.y!=0) //colliding from up or down
             r1.transform.position =  new Vector3(r1.transform.position.x,c2.transform.position.y + c2.HeightUpAndOffset / 2 + c1.HeightUpAndOffset / 2);
         else
             if(c2.transform.position.x >= c1.transform.position.x)
@@ -182,7 +182,7 @@ public class Physics2DManager : MonoBehaviour
         // Update the objects' velocities
         r1.velocity -= impulse / c1.Mass;
         r2.velocity += impulse / c2.Mass;
-        if (c2.transform.position.x >= c1.transform.position.x)
+        if (c2.transform.position.x >= c1.transform.position.x)//depends on the side, teleport the object so it will not collide multiple times in split seconds
         {
             r1.transform.position = new Vector3(c2.transform.position.x - c2.Width / 2 - c1.Width / 2 - 0.01f, c1.transform.position.y);//so they will not enter each other more than once in a split seconds
             r2.transform.position = new Vector3(c1.transform.position.x + c1.Width / 2 + c2.Width / 2 + 0.01f, c2.transform.position.y);
