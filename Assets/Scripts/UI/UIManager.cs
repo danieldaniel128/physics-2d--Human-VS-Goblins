@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public event Action< Image, float, float> UpdateHealthBarImageEvent;
     public List<UpgradeData> UpgradeDatas;
+    public KnightData KnightData;
+    public MinerData MinerData;
 
     [SerializeField] Image CastleHealthBarImage;
     
@@ -37,11 +39,18 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         UpgradeDataInit();
+        InitEntetiesData();
     }
 
     public void BuyUpgrade(int btnIndex)
     {
         UpgradeSystem.BuyUpgrade(btnIndex);
+
+    }
+    public void InitEntetiesData()
+    {
+        MinerData = new MinerData(-1,2,5);
+        KnightData = new KnightData(1.5f,20,8);
     }
 
     public void SwitchBTNInteractToOn(int buttonIndex)

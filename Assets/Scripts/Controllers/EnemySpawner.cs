@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] int EnemiesNumber;
     [SerializeField] float _enemyDamage;
+    [SerializeField] float _enemyHP;
     int countEnemies;
     [SerializeField] float _spawnTimer;
     [SerializeField] float _spawnCooldown;
@@ -33,6 +34,7 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             countEnemies++;
+            EnemiesNumber++;//spawning them forever
             _spawnTimer = 0;
             SpawnGoblin();
         }
@@ -45,6 +47,8 @@ public class EnemySpawner : MonoBehaviour
 
         EnemyController enemyController = enemyInstance.GetComponent<EnemyController>();
         enemyController.EnemyHealth = new Health(healthBarFollow.HealthBarImage, _enemyDamage);
+        enemyController.EnemyHealth.CurrnetHP = _enemyHP;
+        enemyController.EnemyHealth.MaxHP = _enemyHP;
         enemyController.HealthBarFollow = healthBarFollow;
         healthBarFollow.TargetTransform = enemyInstance.transform;
         healthBarFollow.yOffset = yOffset;

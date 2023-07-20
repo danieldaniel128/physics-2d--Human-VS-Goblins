@@ -3918,6 +3918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemiesNumber: 3
   _enemyDamage: 5
+  _enemyHP: 70
   _spawnTimer: 0
   _spawnCooldown: 2
   _enemyPrefab: {fileID: 1805098598465577823, guid: efc489672d1e23c459430bd7d1eea6b0, type: 3}

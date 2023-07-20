@@ -7,8 +7,8 @@ public class KnightConroller : MonoBehaviour//make abstract class later
     [SerializeField] MyBoxCollider2D _knightCollider;
     [SerializeField] MyRigidBody2D _knightRigidBody;
 
-    [SerializeField] float _knightSpeed;
-    public float KnightSpeed { get { return _knightSpeed; } private set { _knightSpeed = value; } }
+    public float _knightSpeed;
+    public float KnightSpeed { get { return _knightSpeed; } set { _knightSpeed = value; } }
     public Health KnightHealth { get; set; }
     public HealthBarFollow KnightHealthBarFollow;
 
@@ -62,6 +62,8 @@ public class KnightConroller : MonoBehaviour//make abstract class later
     bool CanCollideWithCollider(MyBoxCollider2D collider)//true is cant, false is not
     {
         if (collider.CompareTag("Knight") && _knightCollider.CompareTag("Knight"))
+            return false;
+        if (collider.CompareTag("PlayersWeapon")/* && _knightCollider.CompareTag("PlayersWeapon")*/)
             return false;
         return true;
     }

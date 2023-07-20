@@ -33,6 +33,7 @@ public class KnightSpawner : MonoBehaviour
             else
             {
                 countKnights++;
+                KnightsNumber++;//decided to spawn the knights forever
                 _spawnTimer = 0;
                 SpawnKnight();
             }
@@ -45,9 +46,17 @@ public class KnightSpawner : MonoBehaviour
 
         KnightConroller knightController = knightInstance.GetComponent<KnightConroller>();
         knightController.KnightHealth = new Health(healthBarFollow.HealthBarImage, _knightDamage);
+        InitKnightData(knightController);
         knightController.KnightHealthBarFollow = healthBarFollow;
         healthBarFollow.TargetTransform = knightInstance.transform;
         healthBarFollow.yOffset = yOffset;
         healthBarFollow.yOffset = yOffset;
+    }
+    void InitKnightData(KnightConroller knightController)
+    {
+        knightController.KnightHealth.MaxHP = UIManager.Instance.KnightData.KnightHealth;
+        knightController.KnightHealth.CurrnetHP = UIManager.Instance.KnightData.KnightHealth;
+        knightController.KnightHealth.Damage = UIManager.Instance.KnightData.KnightDamage;
+        knightController.KnightSpeed = UIManager.Instance.KnightData.MoveSpeed;
     }
 }

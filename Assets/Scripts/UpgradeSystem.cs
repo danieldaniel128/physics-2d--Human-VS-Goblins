@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 public static class UpgradeSystem
@@ -57,6 +56,8 @@ public static class UpgradeSystem
     {
         upgradeData.UpgradeCost += 5 * (int)upgradeData.CurrentUpgradeLevel;
     }
+
+
 }
 
 
