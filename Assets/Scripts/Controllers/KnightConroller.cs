@@ -20,7 +20,6 @@ public class KnightConroller : MonoBehaviour//make abstract class later
     {
         _knightCollider.OnCollisionEnter += OnMyCollisionEnter2D;
         _knightCollider.OnCollisionExit += OnMyCollisionExit2D;
-        KnightHealth = new Health(KnightHealthBarFollow.HealthBarImage);
         KnightHealth.OnDeath += OnEnemiesDeath;
     }
     private void FixedUpdate()
@@ -37,15 +36,16 @@ public class KnightConroller : MonoBehaviour//make abstract class later
 
     void OnMyCollisionExit2D(MyBoxCollider2D collider)
     {
-
-        if (collider.tag.Equals("EnemyCastle"))
+        if (collider.CompareTag("Enemy"))
         {
-            GameManager.Instance.PlayerCastleHealth.GotHurt(KnightHealth.Damage);//do it so it will get health and do the logic of values inside instead of getting damage
-        }
-        if (collider.tag.Equals("Goblin"))
-        {
+            collider.GetComponent<EnemyController>().EnemyHealth.GotHurt(KnightHealth.Damage);
+            Debug.Log("Before Hurt hp:" + KnightHealth.CurrnetHP);
             KnightHealth.GotHurt(collider.GetComponent<EnemyController>().EnemyHealth.Damage);
+            Debug.Log("Hurt");
+            Debug.Log("Health:" + KnightHealth.CurrnetHP);
+            Debug.Log("TookDamage:" + collider.GetComponent<EnemyController>().EnemyHealth.Damage);
         }
+
         //enemyCollider.OnCollisionEnter
     }
     void OnMyCollisionEnter2D(MyBoxCollider2D collider)

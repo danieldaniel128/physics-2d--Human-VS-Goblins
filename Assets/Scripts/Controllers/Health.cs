@@ -10,7 +10,7 @@ public class Health
 {
     float _currnetHP;
     public float CurrnetHP { get => _currnetHP; set { _currnetHP = value; if (_currnetHP == 0) OnDeath?.Invoke(); } }
-    public float MaxHP { get; set; } = 100;
+    public float MaxHP { get; set; }
     public float Damage { get; set; }
     public Image ImageHealthBar { get; set; }
 

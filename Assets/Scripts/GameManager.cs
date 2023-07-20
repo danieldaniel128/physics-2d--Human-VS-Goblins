@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     {
         PlayerCastleHealth = new Health(_castleHealthBarImage, _playerDamage);
         EnemyCastleHealth = new Health(_enemyCastleHealthBarImage);
+        PlayerCastleHealth.MaxHP = 100;
+        PlayerCastleHealth.CurrnetHP = 100;
+        EnemyCastleHealth.MaxHP = 100;
+        EnemyCastleHealth.CurrnetHP = 100;
     }
 
 }
