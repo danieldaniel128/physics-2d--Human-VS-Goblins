@@ -49,30 +49,17 @@ public static class UpgradeSystem
 
     public static void UpgradeTheLevelUpgrade(this UpgradeData upgradeData)
     {
-        if((int)upgradeData.CurrentUpgradeLevel < 3)
+        if((int)upgradeData.CurrentUpgradeLevel <= 3)
             upgradeData.CurrentUpgradeLevel += 1;
-        switch (upgradeData.UpgradeEntity)
-        {
-            case UpgradeEntityEnum.Weapon:
-                // code block
-                break;
-            case UpgradeEntityEnum.Knight:
-                // code block
-                break;
-            case UpgradeEntityEnum.Catapult:
-                // code block
-                break;
-            case UpgradeEntityEnum.Miner:
-                // code block
-                break;
-            default:
-                // code block
-                break;
-        }
+        UpgradeLevelCost(upgradeData);
     }
-
-
+    public static void UpgradeLevelCost(UpgradeData upgradeData)
+    {
+        upgradeData.UpgradeCost += 5 * (int)upgradeData.CurrentUpgradeLevel;
+    }
 }
+
+
     public enum LevelUpgradeEnum
     {
         Low = 1,
